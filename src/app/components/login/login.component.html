@@ -1,0 +1,68 @@
+<div
+  class="flex flex-col justify-start items-center md:w-full bg-white h-full dark:bg-neutral-700/50 text-black overflow-y-scroll noScroll dark:text-white md:p-4 p-2 max-h-[100vh]"
+>
+  <div class="flex flex-row justify-between items-center w-full gap-2 my-2">
+    <app-heading title="Welcome Back :)" subtitle="login to your account" />
+    <button
+      mat-dialog-close=""
+      class="mx-2 dark:text-white text-black hover:opacity-70 transition duration-300"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <form
+    class="flex flex-col w-full h-full space-y-8 justify-start items-cente md:p-4 p-2"
+    [formGroup]="data"
+  >
+    <div
+      class="flex flex-col w-full items-start text-left justify-center gap-1"
+    >
+      <label
+        for="input-label"
+        class="block text-sm font-medium mb-2 dark:text-white text-left"
+        >Email</label
+      >
+      <input
+        type="email"
+        #email
+        [disabled]="loading === true"
+        formControlName="email"
+        id="input-label"
+        class="py-3 px-4 block w-[100%] border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+        placeholder="you@site.com"
+      />
+      <span class="text-red-500 text-sm" *ngIf="error().email !== ''">{{
+        error().email
+      }}</span>
+    </div>
+    <div
+      class="flex flex-col w-full items-start text-left justify-center gap-1"
+    >
+      <label
+        for="input-labell"
+        class="block text-sm font-medium mb-2 dark:text-white text-left"
+        >password</label
+      >
+      <input
+        type="password"
+        #password
+        [disabled]="loading === true"
+        formControlName="password"
+        id="input-labell"
+        class="py-3 px-4 block w-[100%] border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+        placeholder="password"
+      />
+      <span class="text-red-500 text-sm" *ngIf="error().password !== ''">{{
+        error().password
+      }}</span>
+    </div>
+    <button
+      [disabled]="loading === true"
+      (click)="login()"
+      class="w-full rounded-md p-3 hover:opacity-50 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer dark:bg-neutral-800 dark:text-white text-black bg-neutral-300"
+    >
+      Login
+    </button>
+  </form>
+</div>

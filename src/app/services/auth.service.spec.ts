@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ModeSwitchService } from './mode-switch.service';
+import { AuthService } from './auth.service';
 
-describe('ModeSwitchService', () => {
-  let service: ModeSwitchService;
+describe('AuthService', () => {
+  let service: AuthService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ModeSwitchService);
+    service = TestBed.inject(AuthService);
   });
 
   it('should be created', () => {

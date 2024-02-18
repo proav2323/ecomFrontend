@@ -41,7 +41,6 @@ export class AuthService {
         } else {
           this.user.set(null);
         }
-        console.log(value);
       },
       (err) => {
         this.snackBar.open('something went wrong', 'close');

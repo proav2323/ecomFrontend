@@ -60,9 +60,17 @@
     <button
       [disabled]="loading === true"
       (click)="login()"
-      class="w-full rounded-md p-3 hover:opacity-50 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer dark:bg-neutral-800 dark:text-white text-black bg-neutral-300"
+      class="w-full rounded-md p-3 hover:opacity-50 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer dark:bg-neutral-800 dark:text-white text-black bg-neutral-300 flex justify-center items-center gap-2"
     >
-      Login
+      <mat-spinner diameter="30" *ngIf="loading === true"></mat-spinner>
+      <span class="text-md dark:text-white text-black" *ngIf="loading === false"
+        >Login</span
+      >
     </button>
+    <span
+      (click)="openSignUp()"
+      class="text-center text-blue-700 hover:underline transition text-md cursor-pointer"
+      >No account? Sign up</span
+    >
   </form>
 </div>

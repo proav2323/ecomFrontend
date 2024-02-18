@@ -18,6 +18,7 @@ import {
 } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
+import { SignUpComponent } from '../sign-up/sign-up.component';
 
 @Component({
   selector: 'app-login',
@@ -37,11 +38,25 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private ref: MatDialogRef<LoginComponent>,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private matDialog: MatDialog
   ) {
     effect(() => {
       this.loading = this.isLoading();
     });
+  }
+
+  openSignUp() {
+    this.ref.close();
+    if (window.innerWidth > 760) {
+      this.matDialog.open(SignUpComponent, {
+        width: '30%',
+      });
+    } else {
+      this.matDialog.open(SignUpComponent, {
+        width: '100%',
+      });
+    }
   }
 
   data: FormGroup = new FormGroup({
@@ -60,12 +75,16 @@ export class LoginComponent {
       );
 
       ref.subscribe(
-        (value) => {
+        (value: any) => {
           localStorage.setItem('token', JSON.stringify(value));
           this.isLoading.set(false);
           this.data.enable();
           this.ref.close();
-          this.snackbar.open('login successfull', 'close');
+          const val = this.authService.decodeToken(value.token as string);
+          val.subscribe((va: any) => {
+            this.authService.getUser(va['id']);
+            this.snackbar.open('login successfull', 'close');
+          });
         },
         (err) => {
           console.log(err);

@@ -1,9 +1,11 @@
-import { Component, effect } from '@angular/core';
+import { ThemeService } from 'src/app/theme.service';
+import { Component, effect, WritableSignal, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
 import { SignUpComponent } from '../sign-up/sign-up.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/models/user';
+import { ROLE, User } from 'src/models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -12,11 +14,37 @@ import { User } from 'src/models/user';
 })
 export class NavbarComponent {
   user: User | null = null;
-  constructor(private matDialog: MatDialog, private auth: AuthService) {
+  theme: string = '';
+  isAdmin: WritableSignal<boolean> = signal(false);
+  constructor(
+    private matDialog: MatDialog,
+    private auth: AuthService,
+    private themeS: ThemeService,
+    private router: Router
+  ) {
     effect(() => {
       this.user = this.auth.user();
+      this.theme = this.themeS.theme();
+    });
+    this.router.events.subscribe((data) => {
+      this.isAdmin.set(this.router.url === '/admin' ? true : false);
     });
   }
+
+  actions: {
+    classname: string;
+    ariaLabelledby: string;
+    routerLink?: string;
+    title: string;
+  }[] = [
+    {
+      classname:
+        'flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700',
+      title: 'Actions',
+      routerLink: '',
+      ariaLabelledby: '',
+    },
+  ];
 
   openLogin() {
     if (window.innerWidth > 760) {
@@ -40,5 +68,8 @@ export class NavbarComponent {
         width: '100%',
       });
     }
+  }
+  logout() {
+    this.auth.logout();
   }
 }

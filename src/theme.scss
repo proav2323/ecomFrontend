@@ -1,0 +1,17 @@
+@import "../node_modules/@angular/material/theming";
+@include mat-core();
+
+$my-primary: mat-palette($mat-grey, 200);
+$my-accent: mat-palette($mat-grey, 100);
+
+$my-theme: mat-light-theme($my-primary, $my-accent);
+
+
+@include angular-material-theme($my-theme);
+
+.alternate-theme {
+  $alternate-primary: mat-palette($mat-grey, 900);
+  $alternate-accent:  mat-palette($mat-grey, 800);
+  $alternate-theme: mat-dark-theme($alternate-primary, $alternate-accent);
+  @include angular-material-theme($alternate-theme);
+}

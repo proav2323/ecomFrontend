@@ -1,31 +1,264 @@
 <div
   class="flex flex-row justify-between items-center h-[60px] sticky top-0 shadow-lg dark:bg-neutral-800/70 bg-neutral-200"
+  *ngIf="isAdmin() === false"
 >
   <div
     class="flex flex-row gap-2 items-center cursor-pointer dark:text-white text-black hover:opacity-70 transition duration-500"
     routerLink="/"
   >
-    <img src="../../../assets/images/logo.png" class="w-[50px] h-[50px]" />
-    <span>Ecom</span>
+    <img
+      src="../../../assets/images/logo.png"
+      class="md:w-[50px] md:h-[50px] w-[25px] h-[25px]"
+    />
+    <span class="md:text-lg text-sm">Ecom</span>
   </div>
 
-  <div class="hiiden md:flex flex-row items-center justify-center gap-2 mx-2">
+  <div class="flex-row justify-center items-center w-full hidden md:flex gap-2">
+    <button
+      class="{{ theme }} dark:text-white text-black"
+      mat-icon-button
+      matTooltip="home"
+      routerLink="/"
+      [routerLinkActiveOptions]="{ exact: true }"
+      [routerLinkActive]="'active text-blue-500'"
+      aria-label="Example icon button with a vertical three dot icon"
+    >
+      <mat-icon>home</mat-icon>
+    </button>
+    <button
+      class="{{ theme }}"
+      mat-icon-button
+      matTooltip="see all products"
+      aria-label="Example icon button with a vertical three dot icon"
+    >
+      <mat-icon class="dark:text-white text-black">browse_gallery</mat-icon>
+    </button>
+
+    <button
+      class="{{ theme }}"
+      mat-icon-button
+      matTooltip="search"
+      aria-label="Example icon button with a vertical three dot icon"
+    >
+      <mat-icon class="dark:text-white text-black">search</mat-icon>
+    </button>
+  </div>
+
+  <div class="flex flex-row items-center justify-center gap-2">
     <app-mode-switch />
     <button
       (click)="openLogin()"
       *ngIf="user === null"
       type="button"
-      class="p-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent dark:bg-slate-600 dark:text-white bg-neutral-300 txet-black hover:opacity-70 hover:shadow-xl transition duration-300 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+      class="flex items-center gap-2 text-sm font-semibold rounded-lg border border-transparent dark:text-white text-black hover:opacity-70 hover:shadow-xl transition duration-300 disabled:opacity-50 disabled:pointer-events-none justify-center mx-2"
     >
-      Login
+      <mat-icon class="text-md md:text-xl">login</mat-icon>
+    </button>
+    <div
+      class="flex flex-row gap-2 justify-center items-center"
+      *ngIf="user !== null"
+    >
+      <button
+        [matMenuTriggerFor]="menu"
+        type="button"
+        class="p-2 items-center gap-x-2 text-sm outline-none border-none hover:shadow-2xl transition ease-in-out duration-500 font-medium border disabled:opacity-50 disabled:pointer-events-none dark:text-white text-black rounded-full hidden md:flex"
+      >
+        <mat-icon>person</mat-icon>
+      </button>
+      <button
+        [matMenuTriggerFor]="menuu"
+        type="button"
+        class="p-2 items-center gap-x-2 text-sm outline-none border-none hover:shadow-2xl transition ease-in-out duration-500 font-medium border disabled:opacity-50 disabled:pointer-events-none dark:text-white text-black rounded-full flex md:hidden"
+      >
+        <mat-icon>person</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" class="{{ theme }}">
+        <button mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          <span>settings</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>shopping_cart</mat-icon>
+          <span>cart</span>
+        </button>
+        <button routerLink="admin" mat-menu-item *ngIf="user.role === 'ADMIN'">
+          <mat-icon>admin_panel_settings</mat-icon>
+          View Admin
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon class="dark:text-white text-black">logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+
+      <mat-menu #menuu="matMenu" class="{{ theme }}">
+        <button mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          <span>settings</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>shopping_cart</mat-icon>
+          <span>cart</span>
+        </button>
+        <button routerLink="admin" mat-menu-item *ngIf="user.role === 'ADMIN'">
+          <mat-icon>admin_panel_settings</mat-icon>
+          View Admin
+        </button>
+        <button mat-menu-item>
+          <mat-icon>browse_gallery</mat-icon>
+          <span>browse products</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>search</mat-icon>
+          <span>search</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon class="dark:text-white text-black">logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</div>
+
+<div
+  class="flex flex-row justify-between items-center h-[60px] sticky top-0 shadow-lg dark:bg-neutral-800/70 bg-neutral-200"
+  *ngIf="isAdmin() === true"
+>
+  <div
+    class="flex flex-row gap-2 items-center cursor-pointer dark:text-white text-black hover:opacity-70 transition duration-500"
+    routerLink="/admin"
+  >
+    <img
+      src="../../../assets/images/logo.png"
+      class="md:w-[50px] md:h-[50px] w-[25px] h-[25px]"
+    />
+    <span class="md:text-sm text-sm">Ecom Admin</span>
+  </div>
+
+  <div class="flex-row justify-center items-center w-full hidden md:flex gap-2">
+    <button
+      class="{{ theme }} dark:text-white text-black"
+      mat-icon-button
+      matTooltip="dashbourd"
+      routerLink="/admin"
+      [routerLinkActive]="'active text-blue-500'"
+      aria-label="Example icon button with a vertical three dot icon"
+    >
+      <mat-icon>space_dashbourd</mat-icon>
     </button>
     <button
-      *ngIf="user === null"
-      type="button"
-      (click)="openSignUp()"
-      class="p-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent dark:bg-slate-800 dark:text-white bg-slate-400 txet-black hover:opacity-70 hover:shadow-xl transition duration-300 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+      class="{{ theme }}"
+      mat-icon-button
+      matTooltip="products"
+      aria-label="Example icon button with a vertical three dot icon"
     >
-      Sign up
+      <mat-icon class="dark:text-white text-black">browse_gallery</mat-icon>
     </button>
+
+    <button
+      class="{{ theme }}"
+      mat-icon-button
+      matTooltip="colors"
+      aria-label="Example icon button with a vertical three dot icon"
+    >
+      <mat-icon class="dark:text-white text-black">invert_colors</mat-icon>
+    </button>
+    <button
+      class="{{ theme }}"
+      mat-icon-button
+      matTooltip="categories"
+      aria-label="Example icon button with a vertical three dot icon"
+    >
+      <mat-icon class="dark:text-white text-black">category</mat-icon>
+    </button>
+    <button
+      class="{{ theme }}"
+      mat-icon-button
+      matTooltip="orders"
+      aria-label="Example icon button with a vertical three dot icon"
+    >
+      <mat-icon class="dark:text-white text-black">payments</mat-icon>
+    </button>
+    <button
+      class="{{ theme }}"
+      mat-icon-button
+      matTooltip="users"
+      aria-label="Example icon button with a vertical three dot icon"
+    >
+      <mat-icon class="dark:text-white text-black">person_pin</mat-icon>
+    </button>
+  </div>
+
+  <div class="flex flex-row items-center justify-center gap-2">
+    <app-mode-switch />
+    <div
+      class="flex flex-row gap-2 justify-center items-center"
+      *ngIf="user !== null"
+    >
+      <button
+        [matMenuTriggerFor]="menu"
+        type="button"
+        class="p-2 items-center gap-x-2 text-sm outline-none border-none hover:shadow-2xl transition ease-in-out duration-500 font-medium border disabled:opacity-50 disabled:pointer-events-none dark:text-white text-black rounded-full hidden md:flex"
+      >
+        <mat-icon>person</mat-icon>
+      </button>
+      <button
+        [matMenuTriggerFor]="menuu"
+        type="button"
+        class="p-2 items-center gap-x-2 text-sm outline-none border-none hover:shadow-2xl transition ease-in-out duration-500 font-medium border disabled:opacity-50 disabled:pointer-events-none dark:text-white text-black rounded-full flex md:hidden"
+      >
+        <mat-icon>person</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" class="{{ theme }}">
+        <button mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          <span>settings</span>
+        </button>
+        <button routerLink="/" mat-menu-item *ngIf="user.role === 'ADMIN'">
+          <mat-icon>admin_panel_settings</mat-icon>
+          View user app
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon class="dark:text-white text-black">logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+
+      <mat-menu #menuu="matMenu" class="{{ theme }}">
+        <button mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          <span>settings</span>
+        </button>
+        <button routerLink="/" mat-menu-item *ngIf="user.role === 'ADMIN'">
+          <mat-icon>admin_panel_settings</mat-icon>
+          View user app
+        </button>
+        <button mat-menu-item>
+          <mat-icon>browse_gallery</mat-icon>
+          <span>products</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon class="dark:text-white text-black">invert_colors</mat-icon>
+          <span>colors</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon class="dark:text-white text-black">category</mat-icon>
+          <span>categories</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon class="dark:text-white text-black">payments</mat-icon>
+          <span>orders</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon class="dark:text-white text-black">person_pin</mat-icon>
+          <span>users</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon class="dark:text-white text-black">logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
   </div>
 </div>

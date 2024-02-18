@@ -19,6 +19,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DropdownComponent } from './dropdown/dropdown.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { DashbourdComponent } from './dashbourd/dashbourd.component';
+import { JwtModule } from '@auth0/angular-jwt';
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -28,6 +39,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     LoginComponent,
     SignUpComponent,
     HeadingComponent,
+    DropdownComponent,
+    DashbourdComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +53,15 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     HttpClientModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    DropdownModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatTooltipModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

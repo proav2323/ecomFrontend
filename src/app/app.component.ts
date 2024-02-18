@@ -15,7 +15,7 @@ declare global {
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'frontend';
+  title = 'ECOMM';
 
   constructor(private router: Router, private authService: AuthService) {
     const value = localStorage.getItem('token') ?? '';

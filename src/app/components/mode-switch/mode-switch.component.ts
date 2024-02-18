@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemeService } from 'src/app/theme.service';
 
 @Component({
   selector: 'app-mode-switch',
@@ -6,13 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mode-switch.component.css'],
 })
 export class ModeSwitchComponent implements OnInit {
+  constructor(private themeS: ThemeService) {}
   HSThemeAppearance = {
-    init() {
+    init(s: ThemeService) {
       const defaultTheme = 'default';
       let theme = localStorage.getItem('hs_theme') || defaultTheme;
 
       if (document.querySelector('html')!.classList.contains('dark')) return;
-      this.setAppearance(theme);
+      this.setAppearance(theme, s);
+      s.theme.set(theme === 'dark' ? 'alternate-theme' : '');
     },
     _resetStylesOnLoad() {
       const $resetStyles = document.createElement('style');
@@ -21,7 +24,12 @@ export class ModeSwitchComponent implements OnInit {
       document.head.appendChild($resetStyles);
       return $resetStyles;
     },
-    setAppearance(theme: any, saveInStore = true, dispatchEvent = true) {
+    setAppearance(
+      theme: any,
+      s: ThemeService,
+      saveInStore = true,
+      dispatchEvent = true
+    ) {
       const $resetStylesEl = this._resetStylesOnLoad();
 
       if (saveInStore) {
@@ -41,6 +49,7 @@ export class ModeSwitchComponent implements OnInit {
       document
         .querySelector('html')!
         .classList.add(this.getOriginalAppearance());
+      s.theme.set(theme === 'dark' ? 'alternate-theme' : '');
 
       setTimeout(() => {
         $resetStylesEl.remove();
@@ -68,13 +77,13 @@ export class ModeSwitchComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.HSThemeAppearance.init();
+    this.HSThemeAppearance.init(this.themeS);
 
     window
       .matchMedia('(prefers-color-scheme: dark)')
       .addEventListener('change', (e) => {
         if (this.HSThemeAppearance.getOriginalAppearance() === 'auto') {
-          this.HSThemeAppearance.setAppearance('auto', false);
+          this.HSThemeAppearance.setAppearance('auto', this.themeS, false);
         }
       });
 
@@ -90,6 +99,7 @@ export class ModeSwitchComponent implements OnInit {
         $item.addEventListener('click', () =>
           this.HSThemeAppearance.setAppearance(
             $item.getAttribute('data-hs-theme-click-value'),
+            this.themeS,
             true,
             $item
           )
@@ -99,7 +109,8 @@ export class ModeSwitchComponent implements OnInit {
       $switchableThemes.forEach(($item: any) => {
         $item.addEventListener('change', (e: any) => {
           this.HSThemeAppearance.setAppearance(
-            e.target!.checked ? 'dark' : 'default'
+            e.target!.checked ? 'dark' : 'default',
+            this.themeS
           );
         });
 

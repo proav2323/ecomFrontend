@@ -11,3 +11,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .noScroll::-webkit-scrollbar {
   display: none;
 }
+
+.active {
+  color: rgb(0, 140, 255);
+}

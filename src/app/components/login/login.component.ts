@@ -76,6 +76,7 @@ export class LoginComponent {
 
       ref.subscribe(
         (value: any) => {
+          console.log(value);
           localStorage.setItem('token', value.token);
           this.isLoading.set(false);
           this.data.enable();

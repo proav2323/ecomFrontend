@@ -159,6 +159,7 @@
     <button
       class="{{ theme }}"
       mat-icon-button
+      routerLink="/admin/colors"
       matTooltip="colors"
       aria-label="Example icon button with a vertical three dot icon"
     >
@@ -167,6 +168,7 @@
     <button
       class="{{ theme }}"
       mat-icon-button
+      routerLink="/admin/categories"
       matTooltip="categories"
       aria-label="Example icon button with a vertical three dot icon"
     >
@@ -238,11 +240,11 @@
           <mat-icon>browse_gallery</mat-icon>
           <span>products</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item routerLink="/admin/colors">
           <mat-icon class="dark:text-white text-black">invert_colors</mat-icon>
           <span>colors</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item routerLink="/admin/categories">
           <mat-icon class="dark:text-white text-black">category</mat-icon>
           <span>categories</span>
         </button>

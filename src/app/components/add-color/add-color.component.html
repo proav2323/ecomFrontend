@@ -1,0 +1,78 @@
+<div
+  class="dark:bg-neutral-900 bg-white w-full h-full max-h-[100vh] overflow-y-scroll flex flex-col justify-start items-center noScroll p-4"
+>
+  <div class="flex flex-row justify-between items-center w-full gap-2 my-2">
+    <app-heading title="add colors" subtitle="create your own color" />
+    <button
+      mat-dialog-close=""
+      class="mx-2 dark:text-white text-black hover:opacity-70 transition duration-300"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <form
+    [formGroup]="data"
+    class="flex flex-col justify-between items-center w-full space-y-8 py-2 px-4"
+  >
+    <div
+      class="flex md:flex-row flex-col justify-between items-center w-full gap-2"
+    >
+      <div
+        class="flex flex-col w-full items-start text-left justify-center gap-1"
+      >
+        <label
+          for="input-label"
+          class="block text-sm font-medium mb-2 dark:text-white text-left"
+          >Name</label
+        >
+        <input
+          type="text"
+          #name
+          [disabled]="loading() === true"
+          formControlName="name"
+          id="input-label"
+          class="py-3 px-4 block w-[100%] border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+          placeholder="eg. Blue"
+        />
+        <span class="text-red-500 text-sm" *ngIf="error().name !== ''">{{
+          error().name
+        }}</span>
+      </div>
+
+      <div
+        class="flex flex-col w-full items-start text-left justify-center gap-1"
+      >
+        <label
+          for="input-labell"
+          class="block text-sm font-medium mb-2 dark:text-white text-left"
+          >Color</label
+        >
+        <input
+          type="color"
+          formControlName="color"
+          #color
+          class="p-1 h-10 w-[100%] block bg-transparent cursor-pointer rounded-lg disabled:opacity-50 disabled:pointer-events-none"
+          id="hs-color-input"
+          value="#2563eb"
+          title="Choose your color"
+        />
+        <span class="text-red-500 text-sm" *ngIf="error().color !== ''">{{
+          error().color
+        }}</span>
+      </div>
+    </div>
+    <button
+      mat-button
+      (click)="dataa.isEditing ? edit() : add()"
+      class=" {{
+        theme
+      }} dark:bg-neutral-700 dark:text-white bg-neutral-400 text-black w-full"
+    >
+      <mat-spinner *ngIf="loading() === true" [diameter]="30"></mat-spinner>
+      <span class="dark:text-white text-black" *ngIf="loading() === false">{{
+        dataa.isEditing ? "Edit" : "Add"
+      }}</span>
+    </button>
+  </form>
+</div>

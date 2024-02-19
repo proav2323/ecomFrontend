@@ -1,4 +1,4 @@
-import { ThemeService } from 'src/app/theme.service';
+import { ThemeService } from 'src/app/services/theme.service';
 import { Component, effect, WritableSignal, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
@@ -27,7 +27,7 @@ export class NavbarComponent {
       this.theme = this.themeS.theme();
     });
     this.router.events.subscribe((data) => {
-      this.isAdmin.set(this.router.url === '/admin' ? true : false);
+      this.isAdmin.set(this.router.url.includes('/admin') ? true : false);
     });
   }
 

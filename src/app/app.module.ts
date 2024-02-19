@@ -26,6 +26,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DashbourdComponent } from './dashbourd/dashbourd.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { AuthService } from './services/auth.service';
+import { PhotoService } from './services/photo.service';
+import { ThemeService } from './services/theme.service';
+import { ColorsComponent } from './components/colors/colors.component';
+import { CategoryComponent } from './components/category/category.component';
+import { MatTableModule } from '@angular/material/table';
+import { ColorService } from './services/color.service';
+import { CategoryService } from './services/category.service';
+import { AddColorComponent } from './components/add-color/add-color.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { AddCategoryComponent } from './add-category/add-category.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -41,6 +53,10 @@ export function tokenGetter() {
     HeadingComponent,
     DropdownComponent,
     DashbourdComponent,
+    ColorsComponent,
+    CategoryComponent,
+    AddColorComponent,
+    AddCategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,8 +78,17 @@ export function tokenGetter() {
         tokenGetter,
       },
     }),
+    MatTableModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    PhotoService,
+    ThemeService,
+    ColorService,
+    CategoryService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

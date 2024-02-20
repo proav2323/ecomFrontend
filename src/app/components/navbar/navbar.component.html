@@ -150,6 +150,7 @@
     <button
       class="{{ theme }}"
       mat-icon-button
+      routerLink="/admin/products"
       matTooltip="products"
       aria-label="Example icon button with a vertical three dot icon"
     >
@@ -236,7 +237,7 @@
           <mat-icon>admin_panel_settings</mat-icon>
           View user app
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item routerLink="/admin/products">
           <mat-icon>browse_gallery</mat-icon>
           <span>products</span>
         </button>

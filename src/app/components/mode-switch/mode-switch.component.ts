@@ -36,12 +36,6 @@ export class ModeSwitchComponent implements OnInit {
         localStorage.setItem('hs_theme', theme);
       }
 
-      if (theme === 'auto') {
-        theme = window.matchMedia('(prefers-color-scheme: dark)').matches
-          ? 'dark'
-          : 'default';
-      }
-
       document.querySelector('html')!.classList.remove('dark');
       document.querySelector('html')!.classList.remove('default');
       document.querySelector('html')!.classList.remove('auto');

@@ -1,0 +1,291 @@
+<div
+  class="dark:bg-neutral-900 bg-white w-full h-full max-h-[100vh] overflow-y-scroll flex flex-col justify-start items-center noScroll p-4 rounded-none"
+>
+  <div class="flex flex-row justify-between items-center w-full gap-2 my-2">
+    <app-heading
+      title="add Product"
+      subtitle="create your products for your app"
+    />
+    <button
+      mat-dialog-close=""
+      class="mx-2 dark:text-white text-black hover:opacity-70 transition duration-300"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <form
+    [formGroup]="data"
+    class="flex flex-col justify-between items-center w-full space-y-8 py-2 px-4"
+  >
+    <div
+      class="flex flex-col w-full items-start text-left justify-center gap-1"
+    >
+      <label class="block text-sm font-medium mb-2 dark:text-white text-left"
+        >Name</label
+      >
+      <input
+        type="text"
+        #name
+        [disabled]="loading() === true"
+        formControlName="name"
+        class="py-3 px-4 block w-[100%] border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+        placeholder="eg. hp laptop"
+      />
+      <span class="text-red-500 text-sm" *ngIf="error().name !== ''">{{
+        error().name
+      }}</span>
+    </div>
+
+    <div
+      class="flex flex-col w-full items-start text-left justify-center gap-1"
+    >
+      <label class="block text-sm font-medium mb-2 dark:text-white text-left"
+        >Description</label
+      >
+      <input
+        type="text"
+        #description
+        [disabled]="loading() === true"
+        formControlName="description"
+        class="py-3 px-4 block w-[100%] border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+        placeholder="Description"
+      />
+      <span class="text-red-500 text-sm" *ngIf="error().description !== ''">{{
+        error().description
+      }}</span>
+    </div>
+
+    <div
+      class="flex flex-col w-full items-start text-left justify-center gap-1"
+    >
+      <label class="block text-sm font-medium mb-2 dark:text-white text-left"
+        >Company</label
+      >
+      <input
+        type="text"
+        #company
+        [disabled]="loading() === true"
+        formControlName="company"
+        class="py-3 px-4 block w-[100%] border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+        placeholder="eg. Google"
+      />
+      <span class="text-red-500 text-sm" *ngIf="error().company !== ''">{{
+        error().company
+      }}</span>
+    </div>
+
+    <div
+      class="flex flex-col w-full items-start text-left justify-center gap-1"
+    >
+      <label class="block text-sm font-medium mb-2 dark:text-white text-left"
+        >Price</label
+      >
+      <input
+        type="number"
+        #price
+        [disabled]="loading() === true"
+        formControlName="price"
+        class="py-3 px-4 block w-[100%] border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+        placeholder="price"
+      />
+      <span class="text-red-500 text-sm" *ngIf="error().price !== ''">{{
+        error().price
+      }}</span>
+    </div>
+
+    <div
+      class="flex flex-col w-full items-start text-left justify-center gap-1"
+    >
+      <label class="block text-sm font-medium mb-2 dark:text-white text-left"
+        >Stock</label
+      >
+      <input
+        type="number"
+        #stock
+        [disabled]="loading() === true"
+        formControlName="stock"
+        class="py-3 px-4 block w-[100%] border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+        placeholder="price"
+      />
+      <span class="text-red-500 text-sm" *ngIf="error().stcok !== ''">{{
+        error().stcok
+      }}</span>
+    </div>
+
+    <div
+      class="flex flex-col w-full items-start text-left justify-center gap-1"
+    >
+      <label class="block text-sm font-medium mb-2 dark:text-white text-left"
+        >Banner Text</label
+      >
+      <input
+        type="text"
+        #bannerText
+        [disabled]="loading() === true"
+        formControlName="bannerText"
+        class="py-3 px-4 block w-[100%] border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+        placeholder="Banner Text"
+      />
+      <span
+        class="{{
+          error().bannerText !== ''
+            ? 'text-red-500'
+            : 'dark:text-neutral-600 text-neutral-400'
+        }} text-sm"
+      >
+        {{
+          error().bannerText !== ""
+            ? error().bannerText
+            : "This Is Required If this product is on banner"
+        }}
+      </span>
+    </div>
+
+    <div
+      class="flex flex-col w-full items-start text-left justify-center gap-1"
+    >
+      <label class="block text-sm font-medium mb-2 dark:text-white text-left"
+        >call to action</label
+      >
+      <input
+        type="text"
+        #cta
+        [disabled]="loading() === true"
+        formControlName="cta"
+        class="py-3 px-4 block w-[100%] border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+        placeholder="eg. browse"
+      />
+      <span
+        class="{{
+          error().cta !== ''
+            ? 'text-red-500'
+            : 'dark:text-neutral-600 text-neutral-400'
+        }} text-sm"
+      >
+        {{
+          error().cta !== ""
+            ? error().cta
+            : "This Is Required If this product is on banner"
+        }}
+      </span>
+    </div>
+
+    <div class="flex flex-row justify-between items-center w-full">
+      <div
+        class="flex flex-row gap-3 flex-1 w-full justify-center items-center"
+      >
+        <p-inputSwitch
+          [disabled]="loading() === true"
+          formControlName="onBanner"
+        ></p-inputSwitch>
+        <span class="dark:text-white text-lg">On Banner</span>
+      </div>
+      <div
+        class="flex flex-row gap-3 flex-1 w-full justify-center items-center"
+      >
+        <p-inputSwitch
+          [disabled]="loading() === true"
+          formControlName="new"
+        ></p-inputSwitch>
+        <span class="dark:text-white text-lg">new</span>
+      </div>
+    </div>
+
+    <div
+      class="flex flex-col w-full items-start text-left justify-center gap-1"
+    >
+      <label class="block text-sm font-medium mb-2 dark:text-white text-left"
+        >Category</label
+      >
+      <select
+        #categoryId
+        formControlName="categoryId"
+        class="py-3 px-4 pe-9 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-700 dark:border-transparent dark:text-gray-400 dark:focus:ring-gray-600"
+      >
+        <option class="p-4 m-4" *ngFor="let cat of catgeory" [value]="cat.id">
+          {{ cat.name }}
+        </option>
+      </select>
+      <span class="text-red-500 text-sm" *ngIf="error().category !== ''">{{
+        error().category
+      }}</span>
+    </div>
+
+    <div
+      class="flex flex-row max-w-[100%] overflow-x-scroll gap-2 h-40 noScroll"
+    >
+      <button
+        class="h-[100%] w-40 text-center text-lg dark:text-white text-black dark:border-neutral-800 border-neutral-400 border-dashed border-[1px] hover:opacity-70 transition duration-500 ease-in-out rounded-md"
+        (click)="pick.click()"
+      >
+        <input hidden type="file" (change)="addImg($event)" #pick />
+        Pick Image
+      </button>
+      <img
+        (click)="remove(img)"
+        *ngFor="let img of images()"
+        src="{{ img }}"
+        class="h-40 w-40 cursor-pointer"
+      />
+    </div>
+
+    <div
+      class="flex flex-row max-w-[100%] overflow-x-scroll md:gap-2 gap-1 h-40 noScroll justify-start items-center"
+    >
+      <div
+        class="flex flex-col md:flex-row w-40 min-w-40 md:w-80 md:min-w-80 h-40 items-center text-left justify-center gap-1"
+      >
+        <div
+          class="flex flex-col w-full items-start text-left justify-center gap-2"
+        >
+          <label
+            class="block text-sm font-medium mb-2 dark:text-white text-left"
+            >pick Color</label
+          >
+          <select
+            formControlName="colorId"
+            class="py-3 px-4 pe-9 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-700 dark:border-transparent dark:text-gray-400 dark:focus:ring-gray-600"
+          >
+            <option
+              class="p-4 m-4"
+              *ngFor="let cat of allColors"
+              [value]="cat.id"
+            >
+              {{ cat.name }}
+            </option>
+          </select>
+        </div>
+        <button
+          class="{{
+            theme
+          }} dark:bg-neutral-700 bg-neutral-300 p-3 rounded-md md:mt-10"
+          (click)="addColor()"
+        >
+          Add
+        </button>
+      </div>
+      <div
+        *ngFor="let col of showColors"
+        [style]="{ background: col.color }"
+        (click)="removeColor(col.id)"
+        class="h-40 min-w-40 w-40 p-2 flex flex-col justify-center items-center rounded-md cursor-pointer"
+      >
+        <span class="dark:text-white text-black">{{ col.name }}</span>
+      </div>
+    </div>
+
+    <button
+      mat-button
+      (click)="dataa.isEditing ? edit() : add()"
+      class=" {{
+        theme
+      }} dark:bg-neutral-700 dark:text-white bg-neutral-400 text-black w-full"
+    >
+      <mat-spinner *ngIf="loading() === true" [diameter]="30"></mat-spinner>
+      <span class="dark:text-white text-black" *ngIf="loading() === false">{{
+        dataa.isEditing ? "Edit" : "Add"
+      }}</span>
+    </button>
+  </form>
+</div>

@@ -11,8 +11,9 @@ export class PhotoService {
 
   add(
     file: any,
-    signal: WritableSignal<string>,
-    loading: WritableSignal<boolean>
+    signal: WritableSignal<any>,
+    loading: WritableSignal<boolean>,
+    isArray?: boolean
   ) {
     loading.set(true);
     const storageRef = ref(storage, 'images/' + file.name);
@@ -42,8 +43,13 @@ export class PhotoService {
       () => {
         // Upload completed successfully, now we can get the download URL
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          signal.set(downloadURL);
-          loading.set(false);
+          if (isArray && isArray === true) {
+            signal.update((value) => [...value, downloadURL]);
+            loading.set(false);
+          } else {
+            signal.set(downloadURL);
+            loading.set(false);
+          }
         });
       }
     );

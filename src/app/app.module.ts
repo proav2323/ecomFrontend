@@ -38,6 +38,13 @@ import { AddColorComponent } from './components/add-color/add-color.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AddCategoryComponent } from './add-category/add-category.component';
+import { ProductsService } from './services/products.service';
+import { ProductsComponent } from './components/products/products.component';
+import { AddProductsComponent } from './components/add-products/add-products.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { MatSelectModule } from '@angular/material/select';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -57,6 +64,8 @@ export function tokenGetter() {
     CategoryComponent,
     AddColorComponent,
     AddCategoryComponent,
+    ProductsComponent,
+    AddProductsComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +90,10 @@ export function tokenGetter() {
     MatTableModule,
     MatInputModule,
     MatFormFieldModule,
+    MatSlideToggleModule,
+    InputSwitchModule,
+    MultiSelectModule,
+    MatSelectModule,
   ],
   providers: [
     AuthService,
@@ -88,6 +101,7 @@ export function tokenGetter() {
     ThemeService,
     ColorService,
     CategoryService,
+    ProductsService,
   ],
   bootstrap: [AppComponent],
 })

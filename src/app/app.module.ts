@@ -45,6 +45,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { MatSelectModule } from '@angular/material/select';
+import { PrismaServiceService } from './services/prisma-service.service';
+import { ReviewsComponent } from './components/reviews/reviews.component';
+import { ReviewComponent } from './components/review/review.component';
+import { RatingModule } from 'primeng/rating';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -66,6 +70,8 @@ export function tokenGetter() {
     AddCategoryComponent,
     ProductsComponent,
     AddProductsComponent,
+    ReviewsComponent,
+    ReviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,6 +100,7 @@ export function tokenGetter() {
     InputSwitchModule,
     MultiSelectModule,
     MatSelectModule,
+    RatingModule,
   ],
   providers: [
     AuthService,
@@ -102,6 +109,7 @@ export function tokenGetter() {
     ColorService,
     CategoryService,
     ProductsService,
+    PrismaServiceService,
   ],
   bootstrap: [AppComponent],
 })

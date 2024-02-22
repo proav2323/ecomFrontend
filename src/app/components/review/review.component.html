@@ -1,0 +1,60 @@
+<div
+  *ngIf="review() !== null"
+  class="dark:bg-neutral-900 bg-white w-full h-full max-h-[100vh] overflow-y-scroll flex flex-col justify-start items-center noScroll p-4"
+>
+  <div class="flex flex-row justify-between items-center w-full gap-2 my-2">
+    <app-heading title="see review" subtitle="see detials what user said" />
+    <button
+      mat-dialog-close=""
+      class="mx-2 dark:text-white text-black hover:opacity-70 transition duration-300"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="flex flex-col gap-1 justify-start items-start w-full my-2 p-4">
+    <p-rating
+      [(ngModel)]="review()!.stars"
+      [readonly]="true"
+      [cancel]="false"
+    ></p-rating>
+    <span class="dark:text-neutral-700 text-neutral-300 text-md">{{
+      review()!.comment
+    }}</span>
+  </div>
+
+  <div class="flex flex-row justify-start gap-1 items-start w-full my-2">
+    <span class="dark:text-neutral-700 text-neutral-300 text-md text-left"
+      >posted By:
+    </span>
+    <span class="dark:text-white text-black text-md text-left">{{
+      review()!.user.name
+    }}</span>
+  </div>
+
+  <div class="flex flex-row justify-start items-start w-full gap-3 my-2">
+    <img
+      [src]="
+        review()!.product !== undefined ? review()!.product!.images[0] : ''
+      "
+      class="w-20 h-20 rounded-full"
+    />
+    <div class="flex flex-col gap-1">
+      <span class="dark:text-white text-black text-lg">{{
+        review()!.product!.name
+      }}</span>
+      <span class="dark:text-neutral-600 text-neutral-300 text-sm">{{
+        review()!.product!.description
+      }}</span>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="review() === null"
+  class="dark:bg-neutral-900 bg-white w-full h-full max-h-[100vh] overflow-y-scroll flex flex-col justify-start items-center noScroll p-4"
+>
+  <span class="flex-1 text-center dark:text-white text-black"
+    >No Review Found</span
+  >
+</div>

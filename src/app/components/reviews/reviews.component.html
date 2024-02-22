@@ -1,0 +1,62 @@
+<div class="flex flex-col justify-center items-center w-full my-2 gap-2">
+  <div
+    class="dark:bg-slate-800 bg-neutral-300 shadow-2xl w-[98%] flex justify-between items-center p-2 px-4 rounded-full"
+  >
+    <app-heading title="Reviews" subtitle="Reviews Of Your Products" />
+  </div>
+  <div class="flex flex-col w-[98%] max-w-[100%] overflow-x-scroll noScroll">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="w-[90%] dark:bg-slate-800 rounded-md"
+    >
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>id</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.id }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="comment">
+        <th mat-header-cell *matHeaderCellDef>Comment</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.comment }}
+        </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="stars">
+        <th mat-header-cell *matHeaderCellDef>Stars</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.stars }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>actions</th>
+        <td mat-cell *matCellDef="let element">
+          <div class="flex flex-row justify-center items-center gap-2">
+            <button
+              (click)="openAdd(element.id)"
+              class="{{ theme }} dark:bg-slate-600 dark:text-white text-black"
+              mat-mini-fab
+            >
+              <mat-icon>preview</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumns"
+        class="dark:text-white text-black"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        class="dark:text-white text-black"
+      ></tr>
+    </table>
+  </div>
+</div>

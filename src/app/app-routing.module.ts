@@ -5,6 +5,7 @@ import { AdminGuard } from './guards/admin.guard';
 import { ColorsComponent } from './components/colors/colors.component';
 import { CategoryComponent } from './components/category/category.component';
 import { ProductsComponent } from './components/products/products.component';
+import { ReviewsComponent } from './components/reviews/reviews.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
       { path: 'colors', component: ColorsComponent },
       { path: 'categories', component: CategoryComponent },
       { path: 'products', component: ProductsComponent },
+      { path: 'reviews', component: ReviewsComponent },
     ],
     canActivate: [AdminGuard],
   },

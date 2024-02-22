@@ -8,5 +8,5 @@ export interface Reviews {
   comment: string;
   stars: number;
   productId: string;
-  product: Product;
+  product?: Product;
 }

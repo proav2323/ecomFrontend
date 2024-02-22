@@ -191,6 +191,15 @@
     >
       <mat-icon class="dark:text-white text-black">person_pin</mat-icon>
     </button>
+    <button
+      class="{{ theme }}"
+      mat-icon-button
+      routerLink="/admin/reviews"
+      matTooltip="reviews"
+      aria-label="Example icon button with a vertical three dot icon"
+    >
+      <mat-icon class="dark:text-white text-black">preview</mat-icon>
+    </button>
   </div>
 
   <div class="flex flex-row items-center justify-center gap-2">
@@ -256,6 +265,14 @@
         <button mat-menu-item>
           <mat-icon class="dark:text-white text-black">person_pin</mat-icon>
           <span>users</span>
+        </button>
+        <button
+          routerLink="/admin/reviews"
+          mat-menu-item
+          *ngIf="user.role === 'ADMIN'"
+        >
+          <mat-icon>preview</mat-icon>
+          Reviews
         </button>
         <button mat-menu-item (click)="logout()">
           <mat-icon class="dark:text-white text-black">logout</mat-icon>

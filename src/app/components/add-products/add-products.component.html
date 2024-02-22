@@ -216,7 +216,7 @@
       class="flex flex-row max-w-[100%] overflow-x-scroll gap-2 h-40 noScroll"
     >
       <button
-        class="h-[100%] w-40 text-center text-lg dark:text-white text-black dark:border-neutral-800 border-neutral-400 border-dashed border-[1px] hover:opacity-70 transition duration-500 ease-in-out rounded-md"
+        class="h-[100%] w-40 text-center text-lg dark:text-white text-black dark:border-neutral-800 border-neutral-400 border-dashed border-[1px] hover:opacity-70 transition duration-500 ease-in-out rounded-md min-w-40"
         (click)="pick.click()"
       >
         <input hidden type="file" (change)="addImg($event)" #pick />
@@ -226,7 +226,7 @@
         (click)="remove(img)"
         *ngFor="let img of images()"
         src="{{ img }}"
-        class="h-40 w-40 cursor-pointer"
+        class="h-40 w-40 cursor-pointer min-w-40"
       />
     </div>
 

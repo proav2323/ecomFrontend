@@ -187,6 +187,7 @@
       class="{{ theme }}"
       mat-icon-button
       matTooltip="users"
+      routerLink="/admin/users"
       aria-label="Example icon button with a vertical three dot icon"
     >
       <mat-icon class="dark:text-white text-black">person_pin</mat-icon>
@@ -262,7 +263,7 @@
           <mat-icon class="dark:text-white text-black">payments</mat-icon>
           <span>orders</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item routerLink="/admin/users">
           <mat-icon class="dark:text-white text-black">person_pin</mat-icon>
           <span>users</span>
         </button>

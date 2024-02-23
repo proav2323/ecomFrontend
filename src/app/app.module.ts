@@ -49,6 +49,8 @@ import { PrismaServiceService } from './services/prisma-service.service';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ReviewComponent } from './components/review/review.component';
 import { RatingModule } from 'primeng/rating';
+import { UserComponent } from './components/user/user.component';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -72,6 +74,7 @@ export function tokenGetter() {
     AddProductsComponent,
     ReviewsComponent,
     ReviewComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,6 +104,7 @@ export function tokenGetter() {
     MultiSelectModule,
     MatSelectModule,
     RatingModule,
+    OverlayPanelModule,
   ],
   providers: [
     AuthService,

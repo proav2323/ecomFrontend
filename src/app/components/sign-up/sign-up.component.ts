@@ -42,7 +42,8 @@ export class SignUpComponent {
     private authService: AuthService,
     private ref: MatDialogRef<SignUpComponent>,
     private snackbar: MatSnackBar,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public dataa: { isEditing: boolean }
   ) {
     effect(() => {
       this.loading = this.isLoading();
@@ -66,38 +67,81 @@ export class SignUpComponent {
     email: new FormControl('', [Validators.email, Validators.required]),
     password: new FormControl('', [Validators.required]),
     name: new FormControl('', [Validators.required]),
+    isAdmin: new FormControl(false),
   });
 
   login() {
     this.error.set({ email: '', password: '', name: '' });
     if (this.data.valid) {
+      if (
+        this.dataa !== null &&
+        this.dataa.isEditing === true &&
+        (this.data.controls['isAdmin'].value === undefined ||
+          this.data.controls['isAdmin'].value === null)
+      ) {
+        this.snackbar.open('is Admin is required', 'close');
+        return;
+      }
       this.isLoading.set(true);
       this.data.disable();
       const ref = this.authService.signUp(
         this.data.controls['email'].value!,
         this.data.controls['password'].value!,
-        this.data.controls['name'].value!
+        this.data.controls['name'].value!,
+        this.dataa !== null && this.dataa.isEditing
+          ? this.data.controls['isAdmin'].value === true
+            ? 'ADMIN'
+            : 'USER'
+          : this.data.controls['email'].value === 'anshvishesh03@gmail.com'
+          ? 'ADMIN'
+          : 'USER'
       );
-
-      ref.subscribe(
-        (value: any) => {
-          localStorage.setItem('token', value.token);
-          this.isLoading.set(false);
-          this.data.enable();
-          this.ref.close();
-          const val = this.authService.decodeToken(value.token as string);
-          val.subscribe((va: any) => {
-            this.authService.getUser(va['id']);
-            this.snackbar.open('register successfull', 'close');
-          });
-        },
-        (err) => {
-          console.log(err);
-          this.isLoading.set(false);
-          this.data.enable();
-          this.snackbar.open(err.error.message, 'close');
-        }
-      );
+      if (
+        this.dataa === null ||
+        this.dataa.isEditing === false ||
+        this.dataa.isEditing === undefined ||
+        this.dataa.isEditing === null
+      ) {
+        ref.subscribe(
+          (value: any) => {
+            localStorage.setItem('token', value.token);
+            console.log('anhs is good');
+            this.isLoading.set(false);
+            this.data.enable();
+            this.ref.close();
+            const val = this.authService.decodeToken(value.token as string);
+            val.subscribe((va: any) => {
+              this.authService.getUser(va['id']);
+              this.snackbar.open('register successfull', 'close');
+            });
+          },
+          (err) => {
+            console.log(err);
+            this.isLoading.set(false);
+            this.data.enable();
+            this.snackbar.open(err.error.message, 'close');
+          }
+        );
+      } else {
+        ref.subscribe(
+          (value: any) => {
+            this.isLoading.set(false);
+            this.data.enable();
+            this.ref.close();
+            const val = this.authService.decodeToken(value.token as string);
+            val.subscribe((va: any) => {
+              this.authService.getAll();
+              this.snackbar.open('update sucessfull', 'close');
+            });
+          },
+          (err) => {
+            console.log(err);
+            this.isLoading.set(false);
+            this.data.enable();
+            this.snackbar.open(err.error.message, 'close');
+          }
+        );
+      }
     } else {
       if (this.data.controls['email'].errors) {
         console.log(this.email);

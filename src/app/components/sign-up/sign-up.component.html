@@ -78,18 +78,33 @@
         error().name
       }}</span>
     </div>
+    <div
+      class="flex flex-row gap-3 flex-1 w-full justify-center items-center"
+      *ngIf="dataa !== null && dataa.isEditing === true"
+    >
+      <p-inputSwitch
+        [disabled]="loading === true"
+        formControlName="isAdmin"
+      ></p-inputSwitch>
+      <span class="dark:text-white text-lg">is Admin</span>
+    </div>
     <button
       [disabled]="loading === true"
       (click)="login()"
       class="w-full rounded-md p-3 hover:opacity-50 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer dark:bg-neutral-800 dark:text-white text-black bg-neutral-300 flex items-center justify-center gap-2"
     >
       <mat-spinner diameter="30" *ngIf="loading === true"></mat-spinner>
-      <span class="text-md dark:text-white text-black" *ngIf="loading === false"
-        >sign up</span
+      <span
+        class="text-md dark:text-white text-black"
+        *ngIf="loading === false"
+        >{{
+          dataa === null || dataa.isEditing === false ? "sign up" : "Add"
+        }}</span
       >
     </button>
     <span
       (click)="openLogin()"
+      *ngIf="dataa === null || dataa.isEditing === false"
       class="text-center text-blue-700 hover:underline transition text-md cursor-pointer"
       >have an account? login</span
     >

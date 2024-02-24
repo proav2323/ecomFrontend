@@ -26,14 +26,23 @@
               "src/assets/images"
             ],
             "styles": [
+              "src/styles.css",
+
               "src/theme.scss",
+              "node_modules/minireset.css/minireset.css",
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
-              "src/styles.css"
+              "node_modules/igniteui-angular/styles/igniteui-angular.css"
             ],
             "scripts": [
-              "node_modules/preline/preline.js"
-            ]
+              "node_modules/preline/preline.js",
+              "./node_modules/hammerjs/hammer.min.js"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules"
+              ]
+            }
           },
           "configurations": {
             "production": {
@@ -94,14 +103,22 @@
               "src/assets/images"
             ],
             "styles": [
-              "src/theme.scss",
+              "src/styles.css",
+
+                            "src/theme.scss",
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
-              "src/styles.css"
+              "node_modules/igniteui-angular/styles/igniteui-angular.css"
             ],
             "scripts": [
-              "node_modules/preline/preline.js"
-            ]
+              "node_modules/preline/preline.js",
+              "./node_modules/hammerjs/hammer.min.js"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules"
+              ]
+            }
           }
         }
       }

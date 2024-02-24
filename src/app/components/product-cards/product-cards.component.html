@@ -1,0 +1,36 @@
+<mat-card
+  class="{{
+    theme
+  }} mx-2 min-w-[280px] dark:bg-neutral-800 dark:text-white bg-neutral-300 text-black shadow-2xl dark:shadow-neutral-700 shadow-black flex-col justify-start rounded-lg items-center h-full gap-2 cursor-pointer pb-2"
+  routerLink="/product/{{ product.id }}"
+>
+  <img class="w-[280px] rounded-t-md" src="{{ product.images[0] }}" />
+  <span class="dark:text-white text-black font-semibold text-xl">{{
+    product.name
+  }}</span>
+  <span class="dark:text-neutral-600 text-slate-400 font-semibold text-sm">{{
+    product.price | currency
+  }}</span>
+  <div class="flex flex-row justify-between items-center gap-2">
+    <span
+      class="{{
+        product.stock >= 1 ? 'bg-green-700' : 'bg-red-500'
+      }} px-3 rounded-full"
+      >{{ product.stock >= 1 ? "IN Stock" : "Out Of Stock" }}</span
+    >
+
+    <span
+      *ngIf="product.new === true"
+      class="{{
+        product.new ? 'bg-green-700' : 'bg-red-500'
+      }} px-3 rounded-full"
+      >{{ product.new ? "New" : "Out Of Stock" }}</span
+    >
+  </div>
+
+  <div class="flex flex-row justify-between items-center gap-2">
+    <button mat-fab class="{{ theme }}">
+      <mat-icon>add_shopping_cart</mat-icon>
+    </button>
+  </div>
+</mat-card>

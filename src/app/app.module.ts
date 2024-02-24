@@ -51,6 +51,11 @@ import { ReviewComponent } from './components/review/review.component';
 import { RatingModule } from 'primeng/rating';
 import { UserComponent } from './components/user/user.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { CarouselModule } from 'primeng/carousel';
+import { HomeComponent } from './pages/home/home.component';
+import { IgxCarouselModule, IgxSliderModule } from 'igniteui-angular';
+import { ProductCardsComponent } from './components/product-cards/product-cards.component';
+import { MatCardModule } from '@angular/material/card';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -75,6 +80,8 @@ export function tokenGetter() {
     ReviewsComponent,
     ReviewComponent,
     UserComponent,
+    HomeComponent,
+    ProductCardsComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,6 +112,10 @@ export function tokenGetter() {
     MatSelectModule,
     RatingModule,
     OverlayPanelModule,
+    CarouselModule,
+    IgxCarouselModule,
+    IgxSliderModule,
+    MatCardModule,
   ],
   providers: [
     AuthService,

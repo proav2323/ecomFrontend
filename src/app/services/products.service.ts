@@ -22,6 +22,12 @@ export class ProductsService {
     return ref;
   }
 
+  getAllBanners() {
+    const ref = this.httpClient.get(`${baseUrl}products/featured`);
+
+    return ref;
+  }
+
   add(
     name: string,
     description: string,

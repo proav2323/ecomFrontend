@@ -1,5 +1,7 @@
 <div
-  class="flex flex-row justify-between items-center h-[60px] sticky top-0 shadow-lg dark:bg-neutral-800/70 bg-neutral-200"
+  class="flex flex-row justify-between items-center h-[60px] sticky top-0 shadow-lg {{
+    done() ? 'dark:bg-neutral-800/70 bg-neutral-200' : 'bg-transparent'
+  }} z-50 w-full transition ease-in-out duration-500"
   *ngIf="isAdmin() === false"
 >
   <div

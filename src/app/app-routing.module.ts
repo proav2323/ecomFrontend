@@ -7,6 +7,7 @@ import { CategoryComponent } from './components/category/category.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { UserComponent } from './components/user/user.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     ],
     canActivate: [AdminGuard],
   },
+  { path: '', component: HomeComponent },
 ];
 
 @NgModule({

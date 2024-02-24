@@ -9,6 +9,7 @@ import { Product } from 'src/models/products';
 })
 export class HomeComponent {
   products: Product[] = [];
+  newProducts: Product[] = [];
   responsiveOptions: any[] | undefined;
 
   constructor(private ProductsService: ProductsService) {

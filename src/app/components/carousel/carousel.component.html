@@ -1,0 +1,68 @@
+<div class="w-[99vw] h-[100vh] block mb-3">
+  <div class="carousel">
+    <ng-container
+      *ngFor="let slide of products; let i = index"
+      class="flex flex-col justify-center items-center w-full"
+    >
+      <img
+        [src]="slide.images[0]"
+        class="slide"
+        (mouseenter)="stop()"
+        (mouseleave)="start()"
+        *ngIf="i === currentSlide"
+        @carouselAnimation
+      />
+      <div
+        *ngIf="i === currentSlide"
+        class="absolute top-0 left-0 dark:bg-black/30 bg-slate-900/30 w-full h-full"
+      ></div>
+      <div
+        class="absolute bottom-[15%] w-[98%] flex flex-col gap-2 justify-center items-center"
+        *ngIf="i === currentSlide"
+      >
+        <span class="dark:text-white text-black font-bold text-2xl">{{
+          slide.bannerText
+        }}</span>
+        <button
+          routerLink="/products?category={{ slide.category }}"
+          mat-button
+          class="{{ theme }}  dark:bg-neutral-800 bg-neutral-400"
+        >
+          <span class="dark:text-white text-black">{{ slide.cta }}</span>
+        </button>
+      </div>
+
+      <div
+        *ngIf="i === currentSlide"
+        class="flex flex-row justify-center items-center gap-2 absolute bottom-[5%] w-[98%]"
+      >
+        <div
+          (click)="set(ii)"
+          *ngFor="let slie of products; let ii = index"
+          class="p-2 rounded-full {{
+            currentSlide === ii
+              ? 'dark:bg-slate-700 bg-slate-300'
+              : 'dark:bg-neutral-800 bg-neutral-400'
+          }} cursor-pointer"
+        ></div>
+      </div>
+    </ng-container>
+
+    <button
+      class="control prev dark:bg-neutral-900 dark:text-white bg-neutral-300 text-black overflow-x-hidden"
+      (click)="onPreviousClick()"
+    >
+      <span
+        class="arrow left dark:text-white text-black border-l-[0.1em] border-b-[0.1em] dark:border-black border-white"
+      ></span>
+    </button>
+    <button
+      class="control next dark:bg-neutral-900 dark:text-white bg-neutral-300 text-black overflow-hidden"
+      (click)="onNextClick()"
+    >
+      <span
+        class="arrow right dark:text-white text-black dark:border-black border-white border-l-[0.1em] border-b-[0.1em]"
+      ></span>
+    </button>
+  </div>
+</div>

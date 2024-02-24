@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, WritableSignal, signal } from '@angular/core';
 import { Router, Event, NavigationEnd } from '@angular/router';
 
 import { IStaticMethods } from 'preline/preline';
@@ -16,12 +16,21 @@ declare global {
 })
 export class AppComponent implements OnInit {
   title = 'ECOMM';
+  show: WritableSignal<boolean> = signal(false);
 
   constructor(private router: Router, private authService: AuthService) {
     const value = localStorage.getItem('token') ?? '';
     const val = this.authService.decodeToken(value as string);
     val.subscribe((va: any) => {
       this.authService.getUser(va['id']);
+    });
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        this.show.set(true);
+      } else {
+        this.show.set(false);
+      }
     });
   }
 

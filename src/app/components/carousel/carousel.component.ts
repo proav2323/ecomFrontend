@@ -1,5 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, WritableSignal, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { ThemeService } from 'src/app/services/theme.service';
 import { Product } from 'src/models/products';
 
@@ -21,7 +22,7 @@ export class CarouselComponent {
   @Input() products!: Product[];
   theme: string = '';
   int!: any;
-  constructor(private themeS: ThemeService) {
+  constructor(private themeS: ThemeService, private router: Router) {
     this.theme = this.themeS.theme();
     this.int = setInterval(() => {
       if (this.currentSlide === this.products.length - 1) {
@@ -71,5 +72,11 @@ export class CarouselComponent {
         this.currentSlide += 1;
       }
     }, 10000);
+  }
+
+  route(category: string) {
+    this.router.navigate(['/products'], {
+      queryParams: { category: category },
+    });
   }
 }

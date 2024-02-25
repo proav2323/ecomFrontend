@@ -57,6 +57,7 @@ import { IgxCarouselModule, IgxSliderModule } from 'igniteui-angular';
 import { ProductCardsComponent } from './components/product-cards/product-cards.component';
 import { MatCardModule } from '@angular/material/card';
 import { CarouselComponent } from './components/carousel/carousel.component';
+import { ProductsComponent as pc } from './pages/products/products.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -84,6 +85,7 @@ export function tokenGetter() {
     HomeComponent,
     ProductCardsComponent,
     CarouselComponent,
+    pc,
   ],
   imports: [
     BrowserModule,

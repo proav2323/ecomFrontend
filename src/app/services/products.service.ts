@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, WritableSignal, signal } from '@angular/core';
 import { map } from 'rxjs';
 import { baseUrl } from 'src/constants';
@@ -25,6 +25,32 @@ export class ProductsService {
   getAllBanners() {
     const ref = this.httpClient.get(`${baseUrl}products/featured`);
 
+    return ref;
+  }
+
+  getAllNew() {
+    const ref = this.httpClient.get(`${baseUrl}products/new`);
+
+    return ref;
+  }
+
+  getQuery(data: any) {
+    let httpP = new HttpParams();
+    if (data['category']) {
+      httpP = httpP.append('category', data['category']);
+    }
+    if (data['color']) {
+      httpP = httpP.append('color', data['color']);
+    }
+    if (data['company']) {
+      httpP = httpP.append('company', data['company']);
+    }
+    if (data['price']) {
+      httpP = httpP.append('price', data['price']);
+    }
+    const ref = this.httpClient.get(`${baseUrl}products/query`, {
+      params: httpP,
+    });
     return ref;
   }
 

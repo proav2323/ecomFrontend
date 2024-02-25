@@ -8,6 +8,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { UserComponent } from './components/user/user.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ProductsComponent as pc } from './pages/products/products.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
     canActivate: [AdminGuard],
   },
   { path: '', component: HomeComponent },
+  { path: 'products', component: pc },
 ];
 
 @NgModule({

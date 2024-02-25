@@ -18,6 +18,12 @@ export class HomeComponent {
     ref.subscribe((data) => {
       this.products = data as Product[];
     });
+
+    const reff = this.ProductsService.getAllNew();
+
+    reff.subscribe((data) => {
+      this.newProducts = data as Product[];
+    });
     effect(() => {});
   }
 }

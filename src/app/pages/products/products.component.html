@@ -1,0 +1,147 @@
+<div
+  class="flex flex-col justify-start md:justify-start md:items-start items-center w-full h-full gap-2"
+>
+  <mat-spinner diameter="60" *ngIf="isLoading() === true"></mat-spinner>
+  <div
+    class="flex flex-col md:flex-row justify-start items-center gap-2 w-full h-full"
+    *ngIf="isLoading() === false"
+  >
+    <div
+      class="md:w-[30vw] lg:w-[20vw] w-[100%] md:ml-2 shadow-2xl dark:bg-slate-600 bg-slate-300 h-[30vh] max-h-[30vh] md:h-[90vh] md:max-h-[90vh] overflow-y-scroll noScroll overflow-x-hidden flex flex-col justify-start items-center gap-2 md:my-2 md:rounded-md fixed left-0 top-[60px] z-40"
+    >
+      <div class="flex flex-col justify-start items-center gap-2">
+        <app-heading title="Category"></app-heading>
+        <div class="grid grid-cols-3 gap-1 w-[98%]">
+          <button
+            (click)="
+              data['category']
+                ? data['category'] === cat.id
+                  ? remove('category')
+                  : change('category', cat.id)
+                : change('category', cat.id)
+            "
+            *ngFor="let cat of category"
+            mat-button
+            class="{{
+              data['category']
+                ? data['category'] === cat.id
+                  ? 'dark:bg-slate-800 bg-slate-500'
+                  : 'dark:bg-neutral-800 bg-neutral-300'
+                : 'dark:bg-neutral-800 bg-neutral-300'
+            }}"
+          >
+            <span class="dark:text-white text-black">{{ cat.name }}</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="flex flex-col justify-start items-center gap-2">
+        <app-heading title="Color"></app-heading>
+        <div class="grid grid-cols-3 gap-1 w-[98%]">
+          <button
+            (click)="
+              data['color']
+                ? data['color'] === cat.id
+                  ? remove('color')
+                  : change('color', cat.id)
+                : change('color', cat.id)
+            "
+            *ngFor="let cat of color"
+            mat-button
+            class="{{
+              data['color']
+                ? data['color'] === cat.id
+                  ? 'dark:bg-slate-800 bg-slate-500'
+                  : 'dark:bg-neutral-800 bg-neutral-300'
+                : 'dark:bg-neutral-800 bg-neutral-300'
+            }}"
+          >
+            <span class="dark:text-white text-black">{{ cat.name }}</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="flex flex-col justify-start items-center gap-2">
+        <app-heading title="Companies"></app-heading>
+        <div class="grid grid-cols-3 gap-1 w-[98%]">
+          <button
+            (click)="
+              data['company']
+                ? data['company'] === cat
+                  ? remove('company')
+                  : change('company', cat)
+                : change('company', cat)
+            "
+            *ngFor="let cat of companyies"
+            mat-button
+            class="{{
+              data['company']
+                ? data['company'] === cat
+                  ? 'dark:bg-slate-800 bg-slate-500'
+                  : 'dark:bg-neutral-800 bg-neutral-300'
+                : 'dark:bg-neutral-800 bg-neutral-300'
+            }}"
+          >
+            <span class="dark:text-white text-black">{{ cat }}</span>
+          </button>
+        </div>
+      </div>
+      <div class="flex flex-col justify-start items-center gap-2">
+        <app-heading
+          title="price"
+          subtitle="maximum price you are willing to pay"
+        ></app-heading>
+        <div class="flex flex-row justify-center items-center w-[98%]">
+          <input
+            type="number"
+            class="w-full flex-1 py-2 px-4 dark:bg-neutral-800 bg-neutral-300 dark:focus:outline-black focus:outline-white dark:text-white text-black"
+            placeholder="price"
+            [(ngModel)]="price"
+          />
+          <button
+            (click)="change('price', price)"
+            mat-mini-fab
+            class="m-2 dark:bg-neutral-800 dark:text-white bg-neutral-300 text-black"
+          >
+            <mat-icon>done</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex flex-col justify-start items-start w-full h-full gap-2 md:ml-[31vw] lg:ml-[21vw] mt-[31vh] md:mt-0"
+    >
+      <div
+        class="flex flex-col justify-start items-start gap-2 w-full px-2 flex-1"
+        *ngIf="products().length >= 1"
+      >
+        <app-heading
+          title="filtered products"
+          subtitle="products you filtered"
+        />
+        <div
+          class="flex flex-row justify-start flex-wrap items-stretch w-[98%] max-w-[98%] my-2 gap-2"
+        >
+          <app-product-cards
+            *ngFor="let product of products()"
+            [product]="product"
+            class="lg:h-full"
+          ></app-product-cards>
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex flex-col justify-center items-center gap-2 w-full px-2 flex-1 mx-2"
+      *ngIf="isLoading() === false && products().length === 0"
+    >
+      <app-heading title="no products found" subtitle="reset your filters" />
+      <button
+        mat-button
+        class="dark:bg-neutral-900 bg-neutral-400 mx-4 cursor-pointer"
+        routerLink="/products"
+      >
+        <span class="dark:text-white text-black">reset</span>
+      </button>
+    </div>
+  </div>
+</div>

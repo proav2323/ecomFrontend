@@ -24,7 +24,7 @@
           slide.bannerText
         }}</span>
         <button
-          routerLink="/products?category={{ slide.category }}"
+          (click)="route(slide.categoryId)"
           mat-button
           class="{{ theme }}  dark:bg-neutral-800 bg-neutral-400"
         >

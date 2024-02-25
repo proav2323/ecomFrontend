@@ -17,6 +17,7 @@ export class NavbarComponent {
   theme: string = '';
   isAdmin: WritableSignal<boolean> = signal(false);
   done: WritableSignal<boolean> = signal(false);
+  url: string = '';
   constructor(
     private matDialog: MatDialog,
     private auth: AuthService,
@@ -29,6 +30,7 @@ export class NavbarComponent {
     });
     this.router.events.subscribe((data) => {
       this.isAdmin.set(this.router.url.includes('/admin') ? true : false);
+      this.url = this.router.url;
     });
 
     window.addEventListener('scroll', () => {

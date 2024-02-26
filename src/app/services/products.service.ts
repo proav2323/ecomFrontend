@@ -28,6 +28,11 @@ export class ProductsService {
     return ref;
   }
 
+  getById(id: string) {
+    console.log(id);
+    return this.httpClient.get(`${baseUrl}products/product/${id}`);
+  }
+
   getAllNew() {
     const ref = this.httpClient.get(`${baseUrl}products/new`);
 

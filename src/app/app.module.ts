@@ -58,6 +58,7 @@ import { ProductCardsComponent } from './components/product-cards/product-cards.
 import { MatCardModule } from '@angular/material/card';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { ProductsComponent as pc } from './pages/products/products.component';
+import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -86,6 +87,7 @@ export function tokenGetter() {
     ProductCardsComponent,
     CarouselComponent,
     pc,
+    ProductDetailsComponent,
   ],
   imports: [
     BrowserModule,

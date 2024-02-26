@@ -1,0 +1,149 @@
+<div
+  class="flex flex-col justify-start items-center w-full h-full gap-2 mt-2 pb-2"
+>
+  <mat-spinner diameter="60" *ngIf="isLoading()"></mat-spinner>
+  <div
+    class="flex md:flex-row flex-col justify-center items-center w-full gap-2 h-fit py-2"
+    *ngIf="product !== null && isLoading() === false"
+  >
+    <div
+      class="flex flex-col justify-center items-center w-[98%] md:flex-[0.4] gap-2"
+    >
+      <img src="{{ product.images[selectedImage()] }}" class="w-full" />
+      <div
+        class="flex flex-row justify-start items-center w-full max-w-[w-full] overflow-x-scroll noScroll gap-2"
+      >
+        <img
+          (click)="i !== selectedImage() ? chnage(i) : null"
+          *ngFor="let img of product.images; let i = index"
+          src="{{ img }}"
+          class="min-w-[80px] max-h-[120px] max-w-[120px] transition duration-500 ease-in-out cursor-pointer {{
+            i === selectedImage() ? 'opacity-50' : 'opacity-100'
+          }}"
+        />
+      </div>
+    </div>
+    <div
+      class="md:flex-[0.4] w-[95%] flex flex-col justify-start md:justify-center items-center gap-2"
+    >
+      <span class="font-bold text-2xl dark:text-white text-black">{{
+        product.name
+      }}</span>
+      <span
+        class="dark:text-neutral-500 text-neutral-300 font-semibold text-sm"
+        >{{ product.description }}</span
+      >
+      <div class="flex flex-row justify-center items-center gap-2">
+        <span class="text-yellow-700">{{ avgRev }}</span>
+        <p-rating
+          [(ngModel)]="avgRev"
+          [readonly]="true"
+          [cancel]="false"
+        ></p-rating>
+      </div>
+      <span class="text-red-500 font-semibold text-lg">{{
+        product.price | currency
+      }}</span>
+      <span class="dark:text-slate-800 text-slate-300 font-semibold text-md"
+        >company: {{ product.company }}</span
+      >
+      <span class="dark:text-slate-800 text-slate-300 font-semibold text-sm"
+        >category: {{ product.category.name }}</span
+      >
+      <div
+        class="flex flex-row justify-center items-center w-full max-w-full overflow-x-scroll noScroll gap-2"
+      >
+        <div
+          (click)="colorIndex !== selectedColor() ? changeC(colorIndex) : null"
+          *ngFor="let color of colors(); let colorIndex = index"
+          [style]="{ backgroundColor: color.color }"
+          class="min-w-10 min-h-10 w-10 h-10 rounded-md cursor-pointer {{
+            colorIndex === selectedColor() ? 'opacity-50' : 'opacity-100'
+          }}"
+        ></div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="flex flex-col justify-center items-start w-[95%] gap-4"
+    *ngIf="product !== null && isLoading() === false"
+  >
+    <app-heading
+      title="Reviews"
+      subtitle="see what pople have said"
+    ></app-heading>
+    <div
+      class="flex flex-row justify-center items-center gap-2 w-full h-full"
+      *ngIf="user !== null && added() === false"
+    >
+      <div class="flex-1 w-full flex flex-col gap-2 justify-center items-start">
+        <input
+          [(ngModel)]="comment"
+          type="text"
+          class="dark:bg-neutral-500 w-full py-2 px-2 dark:text-white bg-neutral-400 text-black rounded-md dark:focus:outline-white focus:outline-black outline-1 {{
+            revLoading() === true ? 'opacity-50' : 'opacity-100'
+          }}"
+          placeholder="review comment as {{ user.name }}"
+        />
+        <p-rating [(ngModel)]="rating" [cancel]="true"></p-rating>
+      </div>
+      <button
+        (click)="add()"
+        mat-mini-fab
+        class="dark:bg-neutral-700 dark:text-white text-black bg-neutral-500 mx-2 {{
+          revLoading() === true ? 'opacity-50' : 'opacity-100'
+        }}"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div class="grid md:grid-cols-2 grid-cols-1 w-full gap-2">
+      <div
+        *ngFor="let rev of product.reviews"
+        class="flex flex-row w-full {{
+          revLoading() === true ? 'opacity-50' : 'opacity-100'
+        }}"
+      >
+        <div
+          class="dark:bg-neutral-800 bg-neutral-300 flex flex-col md:flex-row justify-start items-center w-full p-2 shadow-2xl rounded-md"
+        >
+          <span class="dark:text-white text-black text-lg font-bold">{{
+            rev.user.name
+          }}</span>
+          <div class="flex flex-col justify-center items-center flex-1 w-full">
+            <p-rating
+              [readonly]="true"
+              [(ngModel)]="rev.stars"
+              [cancel]="false"
+            ></p-rating>
+            <span
+              class="text-sm font-semibold dark:text-neutral-500 text-neutral-500 text-center"
+              >{{ rev.comment }}</span
+            >
+          </div>
+          <div
+            class="flex flex-row justify-center items-center px-2 mr-2"
+            *ngIf="user !== null && user.id === rev.userId"
+          >
+            <button
+              (click)="deleteR(rev.id)"
+              mat-mini-fab
+              class="dark:bg-neutral-900 bg-neutral-300 dark:text-white text-black"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="flex flex-col justify-center items-center w-full gap-2"
+    *ngIf="product === null && isLoading() === false"
+  >
+    <app-heading
+      title="no product found"
+      subtitle="looks like no product was found"
+    ></app-heading>
+  </div>
+</div>

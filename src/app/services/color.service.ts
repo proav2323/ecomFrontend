@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, WritableSignal, signal } from '@angular/core';
 import { baseUrl } from 'src/constants';
 import { Colors } from 'src/models/colors';
+import { map, switchMap, combineLatest } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -54,5 +55,11 @@ export class ColorService {
     return this.httpClient.delete(`${baseUrl}color/delete/${id}`, {
       headers: headers,
     });
+  }
+
+  getOne(id: string) {
+    return this.httpClient
+      .get<Colors | undefined>(`${baseUrl}color/${id}`)
+      .toPromise();
   }
 }

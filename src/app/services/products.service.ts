@@ -33,6 +33,15 @@ export class ProductsService {
     return this.httpClient.get(`${baseUrl}products/product/${id}`);
   }
 
+  async getByIdWithReturn(id: string) {
+    const dat = await fetch(`${baseUrl}products/product/${id}`);
+    const data = await dat.json();
+    if (data !== undefined && data !== null) {
+      return data as Product;
+    }
+    return null;
+  }
+
   getAllNew() {
     const ref = this.httpClient.get(`${baseUrl}products/new`);
 

@@ -59,6 +59,7 @@ import { MatCardModule } from '@angular/material/card';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { ProductsComponent as pc } from './pages/products/products.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
+import { CartService } from './services/cart.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -131,6 +132,7 @@ export function tokenGetter() {
     CategoryService,
     ProductsService,
     PrismaServiceService,
+    CartService,
   ],
   bootstrap: [AppComponent],
 })

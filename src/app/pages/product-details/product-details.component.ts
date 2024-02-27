@@ -9,6 +9,7 @@ import { Colors } from 'src/models/colors';
 import { ColorService } from 'src/app/services/color.service';
 import { User } from 'src/models/user';
 import { ReviewsService } from 'src/app/services/reviews.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -35,7 +36,8 @@ export class ProductDetailsComponent {
     private colorsService: ColorService,
     private UsersService: AuthService,
     private reviewsService: ReviewsService,
-    private router: Router
+    private router: Router,
+    private cartSefvice: CartService
   ) {
     effect(() => {
       this.user = this.UsersService.user();
@@ -233,6 +235,17 @@ export class ProductDetailsComponent {
       } else {
         this.snackBar.open('please provide full information to add', 'close');
       }
+    }
+  }
+
+  addToCart() {
+    if (this.product !== null) {
+      this.cartSefvice.addToCart(
+        this.product.id,
+        this.product.colors[this.selectedColor()],
+        1,
+        this.product.price
+      );
     }
   }
 }

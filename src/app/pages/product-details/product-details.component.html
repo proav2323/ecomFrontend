@@ -44,6 +44,13 @@
       <span class="text-red-500 font-semibold text-lg">{{
         product.price | currency
       }}</span>
+      <button
+        mat-button
+        class="dark:bg-neutral-950 bg-neutral-50 my-2"
+        (click)="addToCart()"
+      >
+        <span class="dark:text-white text-black">Add To Cart</span>
+      </button>
       <span class="dark:text-slate-800 text-slate-300 font-semibold text-md"
         >company: {{ product.company }}</span
       >

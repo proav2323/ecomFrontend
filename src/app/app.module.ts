@@ -60,6 +60,8 @@ import { CarouselComponent } from './components/carousel/carousel.component';
 import { ProductsComponent as pc } from './pages/products/products.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { CartService } from './services/cart.service';
+import { CartComponent } from './pages/cart/cart.component';
+import { CartproductcardComponent } from './components/cartproductcard/cartproductcard.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -89,6 +91,8 @@ export function tokenGetter() {
     CarouselComponent,
     pc,
     ProductDetailsComponent,
+    CartComponent,
+    CartproductcardComponent,
   ],
   imports: [
     BrowserModule,

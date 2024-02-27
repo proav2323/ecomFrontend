@@ -10,6 +10,7 @@ import { UserComponent } from './components/user/user.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent as pc } from './pages/products/products.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'products', component: pc },
   { path: 'product/:id', component: ProductDetailsComponent },
+  { path: 'cart', component: CartComponent },
 ];
 
 @NgModule({

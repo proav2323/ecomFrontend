@@ -26,7 +26,9 @@ export class ProductCardsComponent implements OnInit {
     }
   }
 
-  addToCart() {
+  addToCart(e: MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
     if (this.product !== null) {
       this.cartService.addToCart(
         this.product.id,

@@ -85,24 +85,28 @@ export class CartService {
     }
   }
 
-  updateProduct(itemId: string, colorId: string, qty: number) {
+  updateProduct(
+    itemId: string,
+    colorId: string,
+    qty: number,
+    state: WritableSignal<boolean>
+  ) {
     if (this.cart() !== null) {
+      state.set(true);
       const item = this.cart()?.items.find((data) => data.productId === itemId);
 
       if (item === undefined) {
         this.snakbar.open('no product found', 'close');
+        state.set(false);
         return;
       }
 
       const oldCart = this.cart()!;
       let newItmes = this.cart()!.items;
       const newItem = item;
-      newItem.Qty = newItem.Qty + qty;
-      newItem.colorId = colorId;
-
-      newItmes = newItmes.filter((data) => data.productId !== item.productId);
-
-      newItmes.push(newItem);
+      const itemI = newItmes.findIndex((data) => data.productId === itemId);
+      newItmes[itemI].colorId = colorId;
+      newItmes[itemI].Qty = newItem.Qty + qty;
 
       oldCart.items = newItmes;
 
@@ -122,8 +126,10 @@ export class CartService {
 
       this.cart.set(newCart);
       localStorage.setItem('cart', JSON.stringify(newCart));
+      state.set(false);
     } else {
       this.snakbar.open('no itme found in cart', 'close');
+      state.set(false);
     }
   }
 
@@ -168,5 +174,10 @@ export class CartService {
     } else {
       this.snakbar.open('no itme found in cart', 'close');
     }
+  }
+
+  clearCart() {
+    this.cart.set(null);
+    localStorage.removeItem('cart');
   }
 }

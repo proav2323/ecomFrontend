@@ -1,0 +1,50 @@
+<div
+  class="flex md:flex-row flex-col justify-between items-center gap-2 dark:border-slate-700 border-slate-500 border-[1px] p-2 w-full rounded-lg mb-2 overflow-x-hidden"
+>
+  <div class="flex flex-row justify-center items-center gap-2">
+    <img src="{{ product.images[0] }}" class="w-20 h-20 rounded-lg" />
+    <app-heading
+      title="{{ product.name }}"
+      subtitle="{{ color?.name }}"
+    ></app-heading>
+  </div>
+
+  <div class="flex flex-row justify-center items-center gap-2">
+    <button
+      (click)="updateQty(false)"
+      class="dark:bg-neutral-950 dark:text-white bg-neutral-400 text-black flex justify-center items-center p-2 px-5 rounded-full text-lg"
+    >
+      -
+    </button>
+
+    <span class="dark:text-white text-black">{{ item.Qty }}</span>
+    <button
+      (click)="updateQty(true)"
+      class="dark:bg-neutral-950 dark:text-white bg-neutral-400 text-black flex justify-center items-center p-2 px-5 rounded-full text-lg"
+    >
+      +
+    </button>
+  </div>
+  <span class="text-lg text-red-500 hidden md:block">{{
+    item.price | currency
+  }}</span>
+  <div class="hidden md:block">
+    <button
+      (click)="removeItem()"
+      mat-mini-fab
+      class="dark:bg-neutral-950 dark:text-white bg-neutral-300 text-black hidden md:block"
+    >
+      <mat-icon>cancel</mat-icon>
+    </button>
+  </div>
+  <div class="flex flex-row justify-between items-center w-full md:hidden">
+    <span class="text-lg text-red-500">{{ item.price | currency }}</span>
+    <button
+      (click)="removeItem()"
+      mat-mini-fab
+      class="dark:bg-neutral-950 dark:text-white bg-neutral-300 text-black"
+    >
+      <mat-icon>cancel</mat-icon>
+    </button>
+  </div>
+</div>

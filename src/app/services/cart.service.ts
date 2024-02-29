@@ -21,7 +21,7 @@ export class CartService {
   async addToCart(itemId: string, colorId: string, qty: number, price: number) {
     if (this.cart() !== null) {
       const found = this.cart()?.items.find(
-        (data) => data.productId === itemId
+        (data) => data.productId === itemId && data.colorId === colorId
       );
 
       if (found !== undefined) {
@@ -93,7 +93,9 @@ export class CartService {
   ) {
     if (this.cart() !== null) {
       state.set(true);
-      const item = this.cart()?.items.find((data) => data.productId === itemId);
+      const item = this.cart()?.items.find(
+        (data) => data.productId === itemId && data.colorId === colorId
+      );
 
       if (item === undefined) {
         this.snakbar.open('no product found', 'close');

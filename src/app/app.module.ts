@@ -62,6 +62,7 @@ import { ProductDetailsComponent } from './pages/product-details/product-details
 import { CartService } from './services/cart.service';
 import { CartComponent } from './pages/cart/cart.component';
 import { CartproductcardComponent } from './components/cartproductcard/cartproductcard.component';
+import { SearchComponent } from './components/search/search.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -93,6 +94,7 @@ export function tokenGetter() {
     ProductDetailsComponent,
     CartComponent,
     CartproductcardComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

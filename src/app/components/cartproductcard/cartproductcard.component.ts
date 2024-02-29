@@ -23,6 +23,7 @@ export class CartproductcardComponent implements OnInit {
   product!: Product;
   color: Colors | undefined = undefined;
   isLoading: WritableSignal<boolean> = signal(false);
+  cutName: string = '';
 
   constructor(
     private productService: ProductsService,
@@ -35,6 +36,20 @@ export class CartproductcardComponent implements OnInit {
 
     ref.subscribe(async (data) => {
       this.product = data as Product;
+      window.innerWidth >= 1024
+        ? (this.cutName = this.product.name)
+        : (this.cutName =
+            this.product.name.length <= 10
+              ? this.product.name
+              : this.product.name.substring(0, 8) + '...');
+      window.addEventListener('resize', () => {
+        window.innerWidth >= 1024
+          ? (this.cutName = this.product.name)
+          : (this.cutName =
+              this.product.name.length <= 10
+                ? this.product.name
+                : this.product.name.substring(0, 8) + '...');
+      });
       this.color = await this.colorService.getOne(this.item.colorId);
     });
   }

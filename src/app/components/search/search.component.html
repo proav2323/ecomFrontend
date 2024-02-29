@@ -1,0 +1,65 @@
+<div
+  class="flex flex-col justify-center items-center w-full gap-2"
+  *ngIf="isLoading() === false"
+>
+  <div class="flex flex-row justify-center items-center w-[99vw] my-2 relative">
+    <input
+      (keyup)="check($event)"
+      class="w-[95vw] md:w-[50%] rounded-l-full px-3 py-2 dark:bg-neutral-950 bg-neutral-50 dark:foucs:outline-white focus:outline-black dark:text-white text-black"
+      placeholder="Search"
+      [(ngModel)]="search"
+    />
+    <button
+      (click)="nav()"
+      class="dark:bg-neutral-950 dark:text-white bg-neutral-50 text-black top-0 right-10 shadow-none py-2 rounded-r-full flex justify-center items-center px-2"
+    >
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div
+  class="flex flex-col justify-start md:justify-start md:items-start items-center w-full h-full gap-2"
+>
+  <mat-spinner diameter="60" *ngIf="isLoading() === true"></mat-spinner>
+  <div
+    class="flex flex-col justify-start items-center gap-2 w-full h-full"
+    *ngIf="isLoading() === false"
+  >
+    <div
+      *ngIf="products().length >= 1"
+      class="flex-1 flex flex-col justify-start items-start w-full h-full gap-2"
+    >
+      <div
+        class="flex flex-col justify-start items-start gap-2 w-full px-2 flex-1"
+      >
+        <app-heading
+          title="filtered products"
+          subtitle="products you filtered"
+        />
+        <div
+          class="flex flex-row justify-start flex-wrap items-stretch w-[98%] max-w-[98%] my-2 gap-2"
+        >
+          <app-product-cards
+            *ngFor="let product of products()"
+            [product]="product"
+            class="lg:h-full"
+          ></app-product-cards>
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex flex-col justify-center items-center gap-2 w-full h-full px-2 mx-2 flex-1"
+      *ngIf="isLoading() === false && products().length === 0"
+    >
+      <app-heading title="no products found" subtitle="reset your filters" />
+      <button
+        mat-button
+        class="dark:bg-neutral-900 bg-neutral-400 mx-4 cursor-pointer"
+        routerLink="/search"
+      >
+        <span class="dark:text-white text-black">reset</span>
+      </button>
+    </div>
+  </div>
+</div>

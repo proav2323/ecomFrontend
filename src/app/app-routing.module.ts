@@ -11,6 +11,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent as pc } from './pages/products/products.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { SearchComponent } from './components/search/search.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'products', component: pc },
   { path: 'product/:id', component: ProductDetailsComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'search', component: SearchComponent },
 ];
 
 @NgModule({

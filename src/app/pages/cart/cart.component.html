@@ -33,8 +33,48 @@
       </div>
     </div>
     <div
-      class="flex flex-[0.2] justify-center items-center w-full dark:bg-neutral-900 bg-neutral-300 rounded-md p-2"
-    ></div>
+      class="flex flex-[0.2] flex-col justify-center items-center w-full dark:bg-neutral-900 bg-neutral-300 rounded-md p-2"
+    >
+      <div
+        class="h-[1px] w-[98%] dark:bg-neutral-600 bg-neutral-300 rounded-full my-2"
+      ></div>
+      <div
+        class="flex flex-row justify-between items-center gap-2 w-full mb-2 py-2"
+      >
+        <span class="text-sm dark:text-neutral-500 text-slate-300"
+          >Subtotal:</span
+        >
+        <span class="text-sm dark:text-slate-700 text-slate-300">{{
+          cart.totalPrice | currency
+        }}</span>
+      </div>
+      <div
+        class="flex flex-row justify-between items-center gap-2 w-full mb-py-2"
+      >
+        <span class="text-sm dark:text-neutral-500 text-slate-300"
+          >discount:</span
+        >
+        <span class="text-sm dark:text-slate-700 text-slate-300">-0.00</span>
+      </div>
+
+      <div
+        class="flex flex-row justify-between items-center gap-2 w-full mb-2 py-2"
+      >
+        <span class="text-sm dark:text-white text-black">Total</span>
+        <span class="text-sm dark:text-white textblack">{{
+          cart.totalPrice | currency
+        }}</span>
+      </div>
+      <div
+        class="h-[1px] w-[98%] dark:bg-neutral-600 bg-neutral-300 rounded-full my-2"
+      ></div>
+      <button
+        mat-button
+        class="dark:bg-neutral-700 dark:text-white bg-neutral-800 text-black w-full"
+      >
+        <span class="dark:text-white text-black">Proceed</span>
+      </button>
+    </div>
   </div>
 </div>
 } @else {

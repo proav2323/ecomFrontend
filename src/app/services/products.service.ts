@@ -155,4 +155,10 @@ export class ProductsService {
     const col = this.httpClient.get(`${baseUrl}color/${id}`);
     return col;
   }
+
+  getSearchedProducts(search: string) {
+    let httpP = new HttpParams();
+    httpP = httpP.append('search', search);
+    return this.httpClient.get(`${baseUrl}products/search`, { params: httpP });
+  }
 }

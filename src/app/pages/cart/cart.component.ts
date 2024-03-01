@@ -1,4 +1,4 @@
-import { Component, effect } from '@angular/core';
+import { Component, effect, Input } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { Cart } from 'src/models/Cart';
 
@@ -9,6 +9,7 @@ import { Cart } from 'src/models/Cart';
 })
 export class CartComponent {
   cart: Cart | null = null;
+  @Input() flex: boolean = true;
 
   constructor(private cartService: CartService) {
     effect(() => {

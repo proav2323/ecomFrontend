@@ -24,6 +24,7 @@ export class CartproductcardComponent implements OnInit {
   color: Colors | undefined = undefined;
   isLoading: WritableSignal<boolean> = signal(false);
   cutName: string = '';
+  @Input() flex: boolean = true;
 
   constructor(
     private productService: ProductsService,

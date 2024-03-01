@@ -1,0 +1,191 @@
+<div class="flex flex-col justify-center items-center gap-2">
+  @if (cart === null) {
+  <div class="flex flex-col justify-center items-center gap-2 h-full">
+    <span class="dark:text-white text-black text-lg">no items in Cart</span>
+  </div>
+  } @else if (user === null) {
+  <div class="flex flex-col justify-center items-center gap-2 h-full">
+    <span class="dark:text-white text-black text-lg">login first</span>
+  </div>
+  } @else {
+  <div
+    class="flex flex-col lg:flex-row justify-center items-start w-full my-2 gap-2"
+  >
+    <div
+      class="flex-[0.5] w-full flex flex-col justify-center items-center py-2 px-2 h-fit dark:bg-slate-800 rounded-md bg-neutral-200 dark:text-white text-black"
+    >
+      <app-heading
+        title="Payment Info"
+        subtitle="tell us how will you pay?"
+        class="w-full text-left my-2"
+      ></app-heading>
+      <form
+        class="flex flex-col justify-center items-center space-y-9 w-full"
+        [formGroup]="data"
+      >
+        <div
+          class="flex flex-col w-full items-start text-left justify-center gap-1"
+        >
+          <label
+            for="input-label"
+            class="block text-sm font-medium mb-2 dark:text-white text-left"
+            >Card Number</label
+          >
+          <input
+            type="number"
+            #cardNumber
+            [disabled]="loading() === true"
+            formControlName="cardNumber"
+            id="input-label"
+            class="py-3 px-4 block w-[100%] border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+            placeholder="4444 4444 4444 4444"
+          />
+          <span
+            class="text-red-500 text-sm"
+            *ngIf="error().cardNumber !== ''"
+            >{{ error().cardNumber }}</span
+          >
+        </div>
+        <div
+          class="flex flex-col w-full items-start text-left justify-center gap-1"
+        >
+          <label
+            for="input-label"
+            class="block text-sm font-medium mb-2 dark:text-white text-left"
+            >Card Holder Name</label
+          >
+          <input
+            type="text"
+            #nameOfCard
+            [disabled]="loading() === true"
+            formControlName="nameOfCard"
+            id="input-label"
+            class="py-3 px-4 block w-[100%] border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+            placeholder="eg. jack smith"
+          />
+          <span
+            class="text-red-500 text-sm"
+            *ngIf="error().nameOfCard !== ''"
+            >{{ error().nameOfCard }}</span
+          >
+        </div>
+        <div
+          class="flex md:flex-row flex-col gap-2 space-y-9 md:space-y-0 justify-center items-center w-full"
+        >
+          <div
+            class="flex flex-col w-full items-start text-left justify-center gap-1"
+          >
+            <label
+              for="input-label"
+              class="block text-sm font-medium mb-2 dark:text-white text-left"
+              >Cvv</label
+            >
+            <input
+              type="number"
+              #cvv
+              [disabled]="loading() === true"
+              formControlName="cvv"
+              id="input-label"
+              class="py-3 px-4 block w-[100%] border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+              placeholder="eg. jack smith"
+            />
+            <span class="text-red-500 text-sm" *ngIf="error().cvv !== ''">{{
+              error().cvv
+            }}</span>
+          </div>
+          <div
+            class="flex flex-col w-full items-start text-left justify-center gap-1"
+          >
+            <label
+              for="input-label"
+              class="block text-sm font-medium mb-2 dark:text-white text-left"
+              >exipry</label
+            >
+            <input
+              type="text"
+              #expiry
+              [disabled]="loading() === true"
+              formControlName="expiry"
+              id="input-label"
+              class="py-3 px-4 block w-[100%] border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+              placeholder="eg. 08/09"
+            />
+            <span class="text-red-500 text-sm" *ngIf="error().expiry !== ''">{{
+              error().expiry
+            }}</span>
+          </div>
+        </div>
+        <div class="flex flex-col justify-center items-center gap-2 w-full">
+          <app-heading
+            title="address"
+            subtitle="where you live?"
+            class="w-full text-left"
+          ></app-heading>
+          <div
+            class="flex md:flex-row flex-col gap-2 space-y-9 md:space-y-0 justify-center items-center w-full"
+          >
+            <div
+              class="flex flex-col w-full items-start text-left justify-center gap-1"
+            >
+              <label
+                for="input-label"
+                class="block text-sm font-medium mb-2 dark:text-white text-left"
+                >road</label
+              >
+              <input
+                type="text"
+                #cvv
+                [disabled]="loading() === true"
+                formControlName="road"
+                id="input-label"
+                class="py-3 px-4 block w-[100%] border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                placeholder="eg. cottonwood road"
+              />
+              <span class="text-red-500 text-sm" *ngIf="error().road !== ''">{{
+                error().road
+              }}</span>
+            </div>
+            <div
+              class="flex flex-col w-full items-start text-left justify-center gap-1"
+            >
+              <label
+                for="input-label"
+                class="block text-sm font-medium mb-2 dark:text-white text-left"
+              >
+                house number</label
+              >
+              <input
+                type="number"
+                #number
+                [disabled]="loading() === true"
+                formControlName="number"
+                id="input-label"
+                class="py-3 px-4 block w-[100%] border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                placeholder="eg. 08/09"
+              />
+              <span
+                class="text-red-500 text-sm"
+                *ngIf="error().number !== ''"
+                >{{ error().number }}</span
+              >
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div
+      class="flex-[0.4] w-full dark:text-white text-black flex flex-col justify-center items-center"
+    >
+      <app-cart [flex]="false" class="w-[98%]"></app-cart>
+      <button
+        mat-button
+        class="dark:bg-neutral-950 bg-neutral-50 w-full flex flex-row justify-center items-center gap-2"
+        (click)="pay()"
+      >
+        <mat-spinner [diameter]="30" *ngIf="loading() === true"></mat-spinner>
+        <span class="dark:text-white text-black">Pay</span>
+      </button>
+    </div>
+  </div>
+  }
+</div>

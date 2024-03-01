@@ -1,3 +1,4 @@
+import { OrdersService } from './services/orders.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -63,6 +64,7 @@ import { CartService } from './services/cart.service';
 import { CartComponent } from './pages/cart/cart.component';
 import { CartproductcardComponent } from './components/cartproductcard/cartproductcard.component';
 import { SearchComponent } from './components/search/search.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -95,6 +97,7 @@ export function tokenGetter() {
     CartComponent,
     CartproductcardComponent,
     SearchComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -139,6 +142,7 @@ export function tokenGetter() {
     ProductsService,
     PrismaServiceService,
     CartService,
+    OrdersService,
   ],
   bootstrap: [AppComponent],
 })

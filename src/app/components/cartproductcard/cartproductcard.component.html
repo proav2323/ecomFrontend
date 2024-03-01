@@ -14,7 +14,10 @@
     ></app-heading>
   </div>
 
-  <div class="flex flex-row justify-center items-center gap-2">
+  <div
+    class="flex flex-row justify-center items-center gap-2"
+    *ngIf="flex === true"
+  >
     <button
       (click)="updateQty(false)"
       class="dark:bg-neutral-950 dark:text-white bg-neutral-400 text-black flex justify-center items-center p-2 px-5 rounded-full text-lg"

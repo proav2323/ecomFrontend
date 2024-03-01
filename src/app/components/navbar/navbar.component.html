@@ -184,6 +184,7 @@
     <button
       class="{{ theme }}"
       mat-icon-button
+      routerLink="/admin/orders"
       matTooltip="orders"
       aria-label="Example icon button with a vertical three dot icon"
     >
@@ -265,7 +266,7 @@
           <mat-icon class="dark:text-white text-black">category</mat-icon>
           <span>categories</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item routerLink="/admin/orders">
           <mat-icon class="dark:text-white text-black">payments</mat-icon>
           <span>orders</span>
         </button>

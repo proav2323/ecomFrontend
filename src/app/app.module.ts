@@ -65,6 +65,7 @@ import { CartComponent } from './pages/cart/cart.component';
 import { CartproductcardComponent } from './components/cartproductcard/cartproductcard.component';
 import { SearchComponent } from './components/search/search.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -98,6 +99,7 @@ export function tokenGetter() {
     CartproductcardComponent,
     SearchComponent,
     CheckoutComponent,
+    OrdersComponent,
   ],
   imports: [
     BrowserModule,

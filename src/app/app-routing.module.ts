@@ -14,6 +14,7 @@ import { CartComponent } from './pages/cart/cart.component';
 import { SearchComponent } from './components/search/search.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { UserGuard } from './guards/user.guard';
+import { OrdersComponent } from './components/orders/orders.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'products', component: ProductsComponent },
       { path: 'reviews', component: ReviewsComponent },
       { path: 'users', component: UserComponent },
+      { path: 'orders', component: OrdersComponent },
     ],
     canActivate: [AdminGuard],
   },

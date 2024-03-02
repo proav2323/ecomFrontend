@@ -1,0 +1,71 @@
+<div
+  class="flex flex-col w-full h-full justify-start items-center dark:bg-neutral-900 bg-neutral-50 dark:text-white text-black p-2 max-h-[100vh] overflow-y-scroll noScroll"
+  *ngIf="isLoading() === true"
+>
+  <mat-spinner [diameter]="60"></mat-spinner>
+</div>
+
+<div
+  class="flex flex-col w-full h-full justify-start items-center dark:bg-neutral-900 bg-neutral-50 dark:text-white text-black p-2 max-h-[100vh] overflow-y-scroll noScroll"
+  *ngIf="isLoading() === false && order === null"
+>
+  <div class="flex flex-row justify-between items-center w-full gap-2 my-2">
+    <app-heading title="Order no found" subtitle="maybe trying agian later" />
+    <button
+      mat-dialog-close=""
+      class="mx-2 dark:text-white text-black hover:opacity-70 transition duration-300"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div
+  class="flex flex-col justify-start items-start w-full h-full dark:bg-neutral-900 bg-neutral-50 dark:text-white text-black p-2 max-h-[100vh] overflow-y-scroll noScroll"
+  *ngIf="isLoading() === false && order !== null"
+>
+  <div class="flex flex-row justify-between items-center w-full gap-2 my-2">
+    <app-heading title="Order Detail" subtitle="look what you ordered" />
+    <button
+      mat-dialog-close=""
+      class="mx-2 dark:text-white text-black hover:opacity-70 transition duration-300"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <span class="my-2 dark:text-neutral-700 text-neutral-400 px-4"
+    >ordered By: {{ order.orderBy.name }}</span
+  >
+
+  <div
+    class="flex flex-row justify-between items-center gap-2 w-full px-4 my-2"
+  >
+    <span class="text-lg text-red-500"
+      >totalPrice: {{ this.order.totalPrice | currency }}</span
+    >
+    <span class="dark:text-neutral-600 text-neutral-50 text-sm"
+      >({{ this.order.totalQty }} products)</span
+    >
+  </div>
+  <span class="dark:text-white text-black text-lg my-2 px-2"
+    >orderedOn: {{ this.order.orderAt | date }}</span
+  >
+
+  <span class="dark:text-white text-black text-lg my-2 px-2"
+    >orderdAt: {{ this.order.address.number }}
+    {{ this.order.address.road }}</span
+  >
+  <span class="dark:text-white text-black text-lg my-2 px-2"
+    >status: {{ this.order.status }}</span
+  >
+
+  <app-heading class="px-4 my-2 text-sm" title="Cart"></app-heading>
+
+  <div class="flex flex-wrap justify-center items-center w-full gap-2">
+    <app-order-cart
+      [item]="pro"
+      *ngFor="let pro of this.order.cart.items"
+    ></app-order-cart>
+  </div>
+</div>

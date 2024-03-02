@@ -15,6 +15,7 @@ import { SearchComponent } from './components/search/search.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { UserGuard } from './guards/user.guard';
 import { OrdersComponent } from './components/orders/orders.component';
+import { UserOrdersComponent } from './pages/user-orders/user-orders.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'search', component: SearchComponent },
   { path: 'checkout', component: CheckoutComponent, canActivate: [UserGuard] },
+  { path: 'orders', component: UserOrdersComponent },
 ];
 
 @NgModule({

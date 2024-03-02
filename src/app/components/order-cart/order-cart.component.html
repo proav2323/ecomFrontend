@@ -1,0 +1,17 @@
+<div
+  class="flex md:flex-row flex-col justify-start items-center gap-2 dark:border-slate-700 border-slate-500 border-[1px] p-2 w-fit rounded-lg mb-2 overflow-x-scroll max-w-[100%] noScroll"
+>
+  <div class="flex flex-row justify-start items-center gap-2 w-full">
+    <img
+      src="{{ product.images[0] }}"
+      class="lg:w-20 lg:h-20 md:w-10 md:h-10 w-20 h-20 rounded-lg mx-2"
+    />
+    <div class="flex flex-col justify-center items-center gap-2">
+      <app-heading
+        title="{{ cutName }}"
+        subtitle="{{ color?.name }}"
+      ></app-heading>
+      <span class="text-lg text-red-500">{{ item.price | currency }}</span>
+    </div>
+  </div>
+</div>

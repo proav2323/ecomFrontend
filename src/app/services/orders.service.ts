@@ -9,6 +9,7 @@ import { orders } from 'src/models/orders';
 })
 export class OrdersService {
   orders: WritableSignal<orders[]> = signal([]);
+  userOrders: WritableSignal<orders[]> = signal([]);
   constructor(private httpClient: HttpClient) {}
 
   getAll() {
@@ -27,6 +28,28 @@ export class OrdersService {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
     return this.httpClient.delete(`${baseUrl}order/delete/${id}`, {
+      headers: headers,
+    });
+  }
+
+  getUserOrders(userId: string) {
+    const token = localStorage.getItem('token') ?? '';
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+
+    this.httpClient
+      .get(`${baseUrl}order/user/${userId}`, {
+        headers: headers,
+      })
+      .subscribe((data) => {
+        this.userOrders.set(data as orders[]);
+      });
+  }
+
+  getOrder(userId: string) {
+    const token = localStorage.getItem('token') ?? '';
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+
+    return this.httpClient.get(`${baseUrl}order/${userId}`, {
       headers: headers,
     });
   }
